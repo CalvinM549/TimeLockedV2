@@ -66,6 +66,13 @@ public class PlayerController : MonoBehaviour
 
         }
 
+        // boss health testing
+        if (Input.GetKeyDown("l"))
+        {
+            boss.GetComponent<Health>().TakeDamage(100);
+        }
+        //
+
         if (stateMachine.CurrentState() is PlayerEnabledState && currentAttack != null && (attackStarted == false))
         {
             attackStarted = true;
@@ -85,6 +92,7 @@ public class PlayerController : MonoBehaviour
         GetComponent<PlayerStunnedState>().stunDuration = healTime;
         yield return new WaitForSeconds(healTime);
         health.GainHealth(healAmount);
+        healCharges--;
     }
 
     public Vector2 PlayerToMouse()

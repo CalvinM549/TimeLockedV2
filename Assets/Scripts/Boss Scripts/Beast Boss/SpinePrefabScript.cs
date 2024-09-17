@@ -2,21 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerProjectileScript : MonoBehaviour
+public class SpinePrefabScript : MonoBehaviour
 {
     private Rigidbody2D rb;
-    
+
     int damage;
     float speed;
-    Vector2 direction;
+    float inaccuracy;
 
-    public void Initialize(int damage, float speed, Vector2 direction)
+    public void Initialize(int damage, float speed, float inaccuracy)
     {
+        Debug.Log("SPINE SPAWNED");
         rb = GetComponent<Rigidbody2D>();
 
         this.damage = damage;
-        this.speed = speed; 
-        this.direction = direction;
+        this.speed = speed;
+        this.inaccuracy = inaccuracy;
 
         StartMovement();
         Destroy(gameObject, 5f);
@@ -24,19 +25,19 @@ public class PlayerProjectileScript : MonoBehaviour
 
     private void StartMovement()
     {
-        rb.velocity = direction * speed;
+        rb.velocity = transform.up * speed;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Boss") || collision.CompareTag("Enemy"))
+        if (collision.CompareTag("Player"))
         {
             collision.GetComponent<Health>().TakeDamage(damage);
         }
         
-        if (!(collision.CompareTag("Player")))
+        if (!(collision.CompareTag("Boss")) || !(collision.CompareTag("Projectile")))
         {
-            Destroy(gameObject);
+            //Destroy(gameObject);
         }
     }
 }

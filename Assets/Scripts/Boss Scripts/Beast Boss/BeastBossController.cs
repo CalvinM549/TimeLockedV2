@@ -17,6 +17,9 @@ public class BeastBossController : BossController
 
     public bool phaseChanged;
     public float phaseTwoCooldown;
+    
+    private int attackCount;
+
     // Start is called before the first frame update
     protected override void Start()
     {
@@ -26,8 +29,7 @@ public class BeastBossController : BossController
     // Update is called once per frame
     void Update()
     {
-        PlayerProximityUpdate();
-
+        
         if (stateMachine.CurrentState() is BossEngagedState && CanAttack())
         {
             Debug.Log("1");
@@ -45,6 +47,12 @@ public class BeastBossController : BossController
 
     }
 
+    private void FixedUpdate()
+    {
+        PlayerProximityUpdate();
+
+    }
+
     protected override void EnableAttack()
     {
         Debug.Log("Attacks Enabled");
@@ -52,24 +60,38 @@ public class BeastBossController : BossController
 
         // Attack Selection Logic
                 
-        if (distanceToPlayer <= spineAttack.attackRange && distanceToPlayer > meleeAttack.attackRange)
-        {
-            Debug.Log("SpineAttackStart");
-            currentAttack = spineAttack;
-        }
+        
 
-        else if (CanShockwave())
+        if (CanShockwave())
         {
             Debug.Log("ShockwaveAttack");
             currentAttack = shockwaveAttack;
             lastShockwave = Time.time;
         }
-
         else
         {
-            Debug.Log("MeleeAttackStart");
-            currentAttack = meleeAttack;
+            switch (attackCount)
+            {
+                case 0:
+                    currentAttack = meleeAttack;
+                    break;
+                case 1:
+                    currentAttack = meleeAttack;
+                    break;
+                case 2:
+                    currentAttack = spineAttack;
+                    break;
+            }
+            if (attackCount == 2)
+            {
+                attackCount = 0;
+            }
+            else
+            {
+                attackCount++;
+            }
         }
+        
 
         StartAttackWindup();
     }

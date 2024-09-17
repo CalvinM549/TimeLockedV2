@@ -310,11 +310,12 @@ MonoBehaviour:
   meleeAttack: {fileID: 0}
   currentAttack: {fileID: 0}
   healCharges: 3
-  healTime: 0.31
-  healAmount: 20
-  rangedAmmo: 10
+  healTime: 0.5
+  healAmount: 60
+  rangedAmmo: 3162
   attackCooldown: 0.33
-  attackOccurred: 0
+  attackStarted: 0
+  attackExecuted: 0
 --- !u!114 &276291175
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -425,8 +426,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackInProgress: 0
   attackDamage: 12
-  windupTime: 0.43
-  followThroughTime: 0.55
+  windupTime: 0
+  followThroughTime: 0.1
   baseProjectile: {fileID: 9144090268408478084, guid: 651e7915bd794cc44ad10d4224ca44ef, type: 3}
   projectileSpeed: 10.15
 --- !u!1 &330651770
@@ -562,13 +563,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackInProgress: 0
-  attackDamage: 0
-  attackRange: 0
-  windupTime: 0
-  followThroughTime: 0
-  spineProjectile: {fileID: 0}
-  angleVariation: 0
-  spineCount: 0
+  attackDamage: 10
+  attackRange: 13.96
+  windupTime: 0.15
+  followThroughTime: 0.15
+  spineProjectile: {fileID: 8197749138660314274, guid: c506090478948c845b726d7fca82fbb4, type: 3}
+  angleVariation: 20
+  spineCount: 4
+  projectileSpeed: 10
 --- !u!114 &330651776
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -582,8 +584,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackInProgress: 0
-  attackDamage: 15
-  attackRange: 8
+  attackDamage: 50
+  attackRange: 4
   windupTime: 0.4
   followThroughTime: 1
   dashDistance: 64

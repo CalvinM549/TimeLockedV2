@@ -23,7 +23,7 @@ public class PlayerRangedAttack : PlayerAttack
         float rotation = Mathf.Atan2(attackDirection.y, attackDirection.x) * Mathf.Rad2Deg;
 
 
-        GameObject projectile = Instantiate(baseProjectile, transform.position, Quaternion.Euler(0,0, rotation + -90));
+        GameObject projectile = Instantiate(baseProjectile, transform.position, Quaternion.Euler(0,0, rotation));
         projectile.GetComponent<PlayerProjectileScript>().Initialize(attackDamage, projectileSpeed, attackDirection);
     }
 

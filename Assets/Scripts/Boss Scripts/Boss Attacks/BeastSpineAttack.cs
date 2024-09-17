@@ -8,25 +8,30 @@ public class BeastSpineAttack : BossAttack
 
     public float angleVariation;
     public int spineCount;
-    private Vector2 targetPosition;
-    private Transform attackTarget;
+    private Vector2 vectorToTarget;
+    private Transform target;
 
-    private float angleToTarget;
+    private float rotationToTarget;
     private Quaternion angleToTargetQ;
+    private float currentRotation;
+
+    public float projectileSpeed;
 
     public override void StartAttack(Transform target)
     {
-        attackTarget = target;
-        targetPosition = target.position;
+        this.target = target;
         Debug.Log("StartAttack");
 
         base.StartAttack(target);
 
-        angleToTarget = Vector2.Angle(transform.position, targetPosition);
-        angleToTargetQ = Quaternion.Euler(0, 0, angleToTarget);
+        //angleToTarget = Vector2.Angle(transform.position, target.position);
 
-        Debug.DrawLine(transform.position, targetPosition, Color.white, 5f);
+        Debug.DrawLine(transform.position, target.position, Color.white, 5f);
 
+        vectorToTarget = (transform.position - target.position);
+
+        rotationToTarget = Mathf.Atan2(vectorToTarget.y, vectorToTarget.x) * Mathf.Rad2Deg;
+        currentRotation = rotationToTarget;
     }
 
     public override void ExecuteAttack()
@@ -35,10 +40,13 @@ public class BeastSpineAttack : BossAttack
         Debug.Log("ExecuteAttack");
         
 
-        for(int currentSpine = 0; currentSpine < spineCount; currentSpine++)
+        for(int i = 0; i < spineCount; i++)
         {
-            GameObject spine = Instantiate(spineProjectile, transform.position, angleToTargetQ);
+            float angleVariationVal = Random.Range(-angleVariation, angleVariation);
+            currentRotation = rotationToTarget + angleVariationVal;
+
+            GameObject spine = Instantiate(spineProjectile, transform.position, Quaternion.Euler(0, 0, currentRotation + 90));
+            spine.GetComponent<SpinePrefabScript>().Initialize(attackDamage, projectileSpeed, angleVariationVal);
         }
     }
-
 }

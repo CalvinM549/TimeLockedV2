@@ -12,6 +12,7 @@ public class GolemBossController : BossController
     public BossAttack vialAttack;
     public BossAttack burstAttack;
 
+    private bool hasPowerAttacked;
 
     public int powerAttackThreshold;
 
@@ -36,9 +37,13 @@ public class GolemBossController : BossController
             DoAttack();
         }
 
-        if (health.currentHealth%powerAttackThreshold == 0)
+        if (health.currentHealth%powerAttackThreshold == 0 && !hasPowerAttacked)
         {
+            hasPowerAttacked = true;
             DoPowerAttack();
+        }
+        else if (!(health.currentHealth % powerAttackThreshold == 0)){
+            hasPowerAttacked = false;
         }
     }
 

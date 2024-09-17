@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class VialPrefabScript : MonoBehaviour
+public class BaseVial : MonoBehaviour
 {
     private Vector2 targetPosition;
     private Vector2 startPosition;
@@ -10,19 +10,17 @@ public class VialPrefabScript : MonoBehaviour
     public AnimationCurve velocityCurve;
 
     private float timeToImpact;
-    public  Vector3 rotationSpeed;
+    public Vector3 rotationSpeed;
     private float areaSize;
-    private int damage;
 
     public float elapsedTime = 0f;
 
     private GolemVialAttack.Vial chosenVial;
 
-    public void Initialize(Vector2 target, Vector3 rotation, float targetTime, float area, int damage, GolemVialAttack.Vial currentVial)
+    public virtual void Initialize(Vector2 target, Vector3 rotation, float targetTime, float area, int damage, GolemVialAttack.Vial currentVial)
     {
         Debug.Log("VialSpawned");
 
-        this.damage = damage;
         areaSize = area;
         rotationSpeed = rotation;
         targetPosition = target;
@@ -35,7 +33,7 @@ public class VialPrefabScript : MonoBehaviour
 
     private IEnumerator MoveOverTime()
     {
-        while(elapsedTime < timeToImpact)
+        while (elapsedTime < timeToImpact)
         {
             elapsedTime += Time.deltaTime;
 
@@ -50,29 +48,17 @@ public class VialPrefabScript : MonoBehaviour
         OnImpact();
     }
 
-    private void OnImpact()
+    protected virtual void OnImpact()
     {
-        switch (chosenVial)
-        {
-            case GolemVialAttack.Vial.LIGHTNING:
-                LightningVial();
-                break;
-
-            case GolemVialAttack.Vial.ACID:
-                break;
-
-            case GolemVialAttack.Vial.ICE:
-                break;
-        }
+        
         Destroy(gameObject);
-    }    
+    }
 
     private void LightningVial()
     {
         Collider2D[] colliders = Physics2D.OverlapCircleAll(targetPosition, areaSize);
-        foreach(Collider2D collider in colliders)
+        foreach (Collider2D collider in colliders)
         {
-
             Debug.DrawLine(transform.position, collider.transform.position, Color.yellow, 2f);
             if (collider.CompareTag("Player"))
             {
@@ -83,19 +69,19 @@ public class VialPrefabScript : MonoBehaviour
 
     private void AcidVial()
     {
-        SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>(); 
+        SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
         //spriteRenderer.sprite =
-            Sprite newSprite;
+        Sprite newSprite;
         CircleCollider2D circleCollider2D = new CircleCollider2D();
         circleCollider2D.enabled = true;
 
         circleCollider2D.radius = areaSize;
-        
+
     }
     public void IceVial()
     {
 
     }
-    
-    
+
+
 }
