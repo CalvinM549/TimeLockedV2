@@ -23,7 +23,8 @@ public class PlayerController : MonoBehaviour
     public float attackCooldown;
     private float lastAttackTime;
 
-    public bool attackOccurred;
+    public bool attackStarted;
+    public bool attackExecuted;
 
     // Start is called before the first frame update
     void Start()
@@ -33,7 +34,8 @@ public class PlayerController : MonoBehaviour
         stateMachine = GetComponent<PlayerStateMachine>();
         health = GetComponent<Health>();
 
-        attackOccurred = false;
+        attackStarted = false;
+        attackExecuted = false;
 
         stateMachine.ChangeState<PlayerEnabledState>();
     }
@@ -64,15 +66,16 @@ public class PlayerController : MonoBehaviour
 
         }
 
-        if (stateMachine.CurrentState() is PlayerEnabledState && currentAttack != null && (!attackOccurred))
+        if (stateMachine.CurrentState() is PlayerEnabledState && currentAttack != null && (attackStarted == false))
         {
-            attackOccurred = true;
+            attackStarted = true;
             currentAttack.StartAttack();
         }
-        else if(stateMachine.CurrentState() is PlayerAttackingState && attackOccurred)
+        else if(stateMachine.CurrentState() is PlayerAttackingState && attackExecuted == false)
         {
+            attackExecuted = true;
             currentAttack.ExecuteAttack();
-            AttackReset(currentAttack.followThroughTime);
+            StartCoroutine(AttackReset(currentAttack.followThroughTime));
         }
     }
 
@@ -104,9 +107,12 @@ public class PlayerController : MonoBehaviour
         yield return new WaitForSeconds(followThrough);
 
         currentAttack.attackInProgress = false;
+        currentAttack = null;
+
         lastAttackTime = Time.time;
         stateMachine.ChangeState<PlayerEnabledState>();
-        attackOccurred = false;
+        attackStarted = false;
+        attackExecuted = false;
 
         Debug.Log("ResetToEngaged");
     }

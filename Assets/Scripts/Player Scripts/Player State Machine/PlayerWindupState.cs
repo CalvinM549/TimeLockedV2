@@ -12,7 +12,7 @@ public class PlayerWindupState : PlayerState
 
     public override void EnterState()
     {
-        Debug.Log("Enter Windup");
+        Debug.Log("Player Windup");
         delayStarted = false;
     }
 

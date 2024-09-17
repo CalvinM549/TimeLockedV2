@@ -40,8 +40,7 @@ public class BeastBossController : BossController
 
         if (health.currentHealth <= health.maxHealth/2 && !phaseChanged)
         {
-            attackCooldown = phaseTwoCooldown;
-            phaseChanged = true;
+            PhaseChange();
         }
 
     }
@@ -73,6 +72,13 @@ public class BeastBossController : BossController
         }
 
         StartAttackWindup();
+    }
+
+    private void PhaseChange()
+    {
+        attackCooldown = phaseTwoCooldown;
+        meleeAttack.followThroughTime = 0.2f;
+        phaseChanged = true;
     }
 
     private bool CanShockwave()

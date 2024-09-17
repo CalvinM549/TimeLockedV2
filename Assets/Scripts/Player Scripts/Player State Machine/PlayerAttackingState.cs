@@ -10,6 +10,7 @@ public class PlayerAttackingState : PlayerState
     public override void EnterState()
     {
         //
+        Debug.Log("Player Attacking");
     }
 
     public override void UpdateState()
