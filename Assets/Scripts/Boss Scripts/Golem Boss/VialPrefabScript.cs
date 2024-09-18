@@ -85,7 +85,7 @@ public class VialPrefabScript : MonoBehaviour
     {
         SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>(); 
         //spriteRenderer.sprite =
-            Sprite newSprite;
+        //Sprite newSprite;
         CircleCollider2D circleCollider2D = new CircleCollider2D();
         circleCollider2D.enabled = true;
 

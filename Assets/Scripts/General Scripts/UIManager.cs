@@ -14,11 +14,13 @@ public class UIManager : MonoBehaviour
     public UnityEngine.UI.Image playerHealthBarGhost;
 
     public TextMeshProUGUI ammoText;
+    public TextMeshProUGUI healChargeText;
 
     public TextMeshProUGUI timerText;
 
     private GameObject player;
     private GameObject boss;
+    public GameObject GameManager;
 
     public int playerMaxHealth;
     public int bossMaxHealth;
@@ -39,9 +41,19 @@ public class UIManager : MonoBehaviour
         
     }
 
-    public void UpdateAmmoCount()
+    public void UpdateAmmoCount(int ammo)
     {
-        //ammoText.text = player.GetComponent<PlayerController>().ammoCount;
+        ammoText.text = (ammo.ToString());
+    }
+
+    public void UpdateHealCharges(int charges)
+    {
+        healChargeText.text = (charges.ToString());
+    }
+
+    public void UpdateTimerText()
+    {
+        
     }
 
     public void UpdateHealthBar(int newHealth, GameObject damagedObject)

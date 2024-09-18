@@ -2,31 +2,43 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BaseVial : MonoBehaviour
+public abstract class BaseVial : MonoBehaviour
 {
-    private Vector2 targetPosition;
-    private Vector2 startPosition;
+    public Sprite areaSprite;
+
+    protected SpriteRenderer spriteRenderer;
+    protected CircleCollider2D circleCollider;
+
+    protected Vector2 target;
+    protected Vector2 startPosition;
 
     public AnimationCurve velocityCurve;
 
-    private float timeToImpact;
-    public Vector3 rotationSpeed;
-    private float areaSize;
+    protected float timeToImpact;
+    protected Vector3 rotationSpeed;
+    protected float area;
 
-    public float elapsedTime = 0f;
+    protected int damage;
+    protected float vialDuration;
 
-    private GolemVialAttack.Vial chosenVial;
+    protected float elapsedTime = 0f;
 
-    public virtual void Initialize(Vector2 target, Vector3 rotation, float targetTime, float area, int damage, GolemVialAttack.Vial currentVial)
+
+    public virtual void Initialize(int damage, float area, Vector2 target, Vector3 rotationSpeed, float timeToImpact, float vialDuration)
     {
-        Debug.Log("VialSpawned");
+        this.damage = damage;
+        this.area = area;
+        this.rotationSpeed = rotationSpeed;
+        this.target = target;
+        this.timeToImpact = timeToImpact;
+        this.vialDuration = vialDuration;
 
-        areaSize = area;
-        rotationSpeed = rotation;
-        targetPosition = target;
-        timeToImpact = targetTime;
+        circleCollider = GetComponent<CircleCollider2D>();
+        circleCollider.radius = area;
+
+        spriteRenderer = GetComponent<SpriteRenderer>();
+
         startPosition = transform.position;
-        chosenVial = currentVial;
 
         StartCoroutine(MoveOverTime());
     }
@@ -42,46 +54,19 @@ public class BaseVial : MonoBehaviour
             float t = elapsedTime / timeToImpact;
             float curveValue = velocityCurve.Evaluate(t);
 
-            transform.position = Vector2.Lerp(startPosition, targetPosition, curveValue);
+            transform.position = Vector2.Lerp(startPosition, target, curveValue);
             yield return null;
         }
         OnImpact();
     }
 
-    protected virtual void OnImpact()
-    {
-        
-        Destroy(gameObject);
-    }
+    protected abstract void OnImpact();
 
-    private void LightningVial()
-    {
-        Collider2D[] colliders = Physics2D.OverlapCircleAll(targetPosition, areaSize);
-        foreach (Collider2D collider in colliders)
-        {
-            Debug.DrawLine(transform.position, collider.transform.position, Color.yellow, 2f);
-            if (collider.CompareTag("Player"))
-            {
-                collider.GetComponent<Health>().TakeDamage(damage);
-            }
-        }
-    }
+    protected abstract void VialEffects();
 
-    private void AcidVial()
-    {
-        SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
-        //spriteRenderer.sprite =
-        Sprite newSprite;
-        CircleCollider2D circleCollider2D = new CircleCollider2D();
-        circleCollider2D.enabled = true;
 
-        circleCollider2D.radius = areaSize;
-
-    }
-    public void IceVial()
-    {
-
-    }
+ 
 
 
 }
+//int damage, float area, Vector2 target, Vector3 rotation, float timeToImpact

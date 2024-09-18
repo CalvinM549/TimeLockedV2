@@ -14,7 +14,6 @@ public class BossWindupState : BossState
 
     public override void EnterState()
     {
-        Debug.Log("Enter Windup");
         delayStarted = false;
     }
 
@@ -29,7 +28,7 @@ public class BossWindupState : BossState
 
     public override void ExitState()
     {
-        Debug.Log("Exit Windup");
+        //
     }
 
     private IEnumerator DelayAttack(float delayAmount)

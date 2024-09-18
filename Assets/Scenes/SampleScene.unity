@@ -931,6 +931,8 @@ GameObject:
   - component: {fileID: 1555594838}
   - component: {fileID: 1555594842}
   - component: {fileID: 1555594841}
+  - component: {fileID: 1555594844}
+  - component: {fileID: 1555594845}
   - component: {fileID: 1555594843}
   - component: {fileID: 1555594839}
   - component: {fileID: 1555594840}
@@ -1096,14 +1098,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3924e8b919e72784f80b27aa51eb66f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rangedAttack: {fileID: 0}
-  meleeAttack: {fileID: 0}
+  rangedAttack: {fileID: 1555594844}
+  meleeAttack: {fileID: 1555594845}
   currentAttack: {fileID: 0}
   healCharges: 3
   healTime: 0.31
-  healAmount: 20
-  rangedAmmo: 0
-  attackCooldown: 0
+  healAmount: 58
+  rangedAmmo: 5
+  attackCooldown: 0.33
+  attackStarted: 0
+  attackExecuted: 0
 --- !u!114 &1555594842
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1132,6 +1136,42 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   LastAttackTime: 0
+--- !u!114 &1555594844
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1555594835}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93f0418cfc8bddb4993c73fc3b24ecbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackInProgress: 0
+  attackDamage: 15
+  windupTime: 0
+  followThroughTime: 0
+  baseProjectile: {fileID: 9144090268408478084, guid: 651e7915bd794cc44ad10d4224ca44ef, type: 3}
+  projectileSpeed: 9.69
+--- !u!114 &1555594845
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1555594835}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65ab70a5cfee6e74b92c0ce8b3eb7572, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackInProgress: 0
+  attackDamage: 20
+  windupTime: 0
+  followThroughTime: 0
+  meleeRange: 1.5
+  meleeAngle: 60
 --- !u!1 &1665112177
 GameObject:
   m_ObjectHideFlags: 0
@@ -1224,8 +1264,8 @@ MonoBehaviour:
   meleeAttack: {fileID: 1665112186}
   vialAttack: {fileID: 1665112187}
   burstAttack: {fileID: 1665112188}
-  powerAttackThreshold: 300
-  chosenAttack: 0
+  powerAttackThreshold: 700
+  thresholdChange: 300
 --- !u!212 &1665112182
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1322,7 +1362,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -1378,9 +1418,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackInProgress: 0
-  attackDamage: 0
-  attackRange: 3
-  windupTime: 1
+  attackDamage: 40
+  attackRange: 2
+  windupTime: 0.4
   followThroughTime: 1
   dashDistance: 50
 --- !u!114 &1665112187
@@ -1397,15 +1437,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackInProgress: 0
   attackDamage: 0
-  attackRange: 7
+  attackRange: 10
   windupTime: 0.6
   followThroughTime: 1
   vialPrefab: {fileID: 5447039372709000310, guid: 6b44ca6f867629d4eab7698b0ae326fb, type: 3}
   currentVial: 0
   lightningDamage: 37
-  areaSize: 3
+  lightningDuration: 0.1
+  iceDuration: 5
+  acidDamage: 3
+  acidDuration: 5
+  areaSize: 4
   vialSpeed: 0.15
-  vialRotationSpeed: {x: 0, y: 0, z: 118.9}
+  rotationSpeed: {x: 0, y: 0, z: 53}
 --- !u!114 &1665112188
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1419,7 +1463,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackInProgress: 0
-  attackDamage: 0
+  attackDamage: 150
   attackRange: 6
   windupTime: 4
   followThroughTime: 1

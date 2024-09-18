@@ -10,8 +10,7 @@ public class BossIdleState : BossState
 
     public override void EnterState()
     {
-        Debug.Log("Enter Idle");
-
+        //
     }
 
     public override void UpdateState()
@@ -25,7 +24,7 @@ public class BossIdleState : BossState
 
     public override void ExitState()
     {
-        Debug.Log("Exit Idle");
+        //
     }
 
     public IEnumerator DelayedUpdate()

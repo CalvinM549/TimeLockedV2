@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static GolemVialAttack;
 
 public class GolemVialAttack : BossAttack
 {
@@ -11,13 +12,23 @@ public class GolemVialAttack : BossAttack
     public Vial currentVial;
 
     public int lightningDamage;
+    public float lightningDuration;
+
+    public float iceDuration;
+
+    public int acidDamage;
+    public float acidDuration;
+
+
+
+
 
     private int randomVial;
     private Transform currentTarget;
 
     public float areaSize;
     public float vialSpeed;
-    public Vector3 vialRotationSpeed;
+    public Vector3 rotationSpeed;
 
 
     public override void StartAttack(Transform target)
@@ -48,7 +59,22 @@ public class GolemVialAttack : BossAttack
         float distance = Vector3.Distance(finalTarget.position, transform.position);
         float delay = distance * vialSpeed;
         Debug.Log("Spawn " + currentVial);
-        vial.GetComponent<VialPrefabScript>().Initialize(finalTarget.position, vialRotationSpeed, delay, areaSize, lightningDamage, currentVial);
+        
+        switch (currentVial)
+        {
+            //int damage, float area, Vector2 target, Vector3 rotation, float timeToImpact
+
+            case Vial.LIGHTNING:
+                vial.GetComponent<LightningVial>().Initialize(lightningDamage, areaSize, finalTarget.position, rotationSpeed, delay, lightningDuration);
+                break;
+            case Vial.ACID:
+                vial.GetComponent<AcidVial>().Initialize(acidDamage, areaSize, finalTarget.position, rotationSpeed, delay, acidDuration);
+                break;
+            case Vial.ICE:
+                vial.GetComponent<IceVial>().Initialize(0, areaSize, finalTarget.position, rotationSpeed, delay, iceDuration);
+                break;
+        }
+
     }
 
     private IEnumerator GetRandomVials(Transform finalTarget)
@@ -63,3 +89,5 @@ public class GolemVialAttack : BossAttack
         }
     }
 }
+
+//vial.GetComponent<VialPrefabScript>().Initialize(finalTarget.position, rotationSpeed, delay, areaSize, lightningDamage, currentVial);

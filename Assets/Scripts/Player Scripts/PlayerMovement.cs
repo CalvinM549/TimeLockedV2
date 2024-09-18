@@ -27,8 +27,8 @@ public class PlayerMovement : MonoBehaviour
     {
         if (movementEnabled)
         {
-            vertical = Input.GetAxis("Vertical");
-            horizontal = Input.GetAxis("Horizontal");
+            vertical = Input.GetAxisRaw("Vertical");
+            horizontal = Input.GetAxisRaw("Horizontal");
 
             if (Input.GetKeyDown("space"))
             {
@@ -44,7 +44,10 @@ public class PlayerMovement : MonoBehaviour
 
     public void Slow(float slowValue)
     {
-        currentSpeed *= slowValue;
+        if(currentSpeed == baseSpeed)
+        {
+            currentSpeed *= slowValue;
+        }
     }
 
     public void EndSlow()

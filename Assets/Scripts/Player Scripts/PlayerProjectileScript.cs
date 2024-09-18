@@ -34,7 +34,7 @@ public class PlayerProjectileScript : MonoBehaviour
             collision.GetComponent<Health>().TakeDamage(damage);
         }
         
-        if (!(collision.CompareTag("Player")))
+        if ((collision.CompareTag("Boss")) || collision.CompareTag("Projectile"))
         {
             Destroy(gameObject);
         }

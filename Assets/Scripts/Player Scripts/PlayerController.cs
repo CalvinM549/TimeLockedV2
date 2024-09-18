@@ -10,8 +10,10 @@ public class PlayerController : MonoBehaviour
     private Health health;
     private PlayerStateMachine stateMachine;
 
+    private UIManager uiManager;
+
     public PlayerAttack rangedAttack;
-    public PlayerAttack meleeAttack;
+    public PlayerMeleeAttack meleeAttack;
     public PlayerAttack currentAttack;
 
     public int healCharges;
@@ -34,6 +36,8 @@ public class PlayerController : MonoBehaviour
         stateMachine = GetComponent<PlayerStateMachine>();
         health = GetComponent<Health>();
 
+        uiManager = GameObject.Find("UIManager").GetComponent<UIManager>();
+
         attackStarted = false;
         attackExecuted = false;
 
@@ -53,12 +57,14 @@ public class PlayerController : MonoBehaviour
         {
             currentAttack = rangedAttack;
             rangedAmmo--;
+            uiManager.UpdateAmmoCount(rangedAmmo);
         }
 
         // Heal
         if (Input.GetKeyDown("f") && healCharges > 0)
         {
             StartCoroutine(HealPlayer());
+            uiManager.UpdateAmmoCount(healCharges);
         }
 
         if(Input.GetKeyDown("space") && CanAttack())
@@ -123,5 +129,10 @@ public class PlayerController : MonoBehaviour
         attackExecuted = false;
 
         Debug.Log("ResetToEngaged");
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawWireSphere(transform.position, meleeAttack.meleeRange);
     }
 }

@@ -15,6 +15,7 @@ public class GolemBossController : BossController
     private bool hasPowerAttacked;
 
     public int powerAttackThreshold;
+    public int thresholdChange;
 
 
 
@@ -37,13 +38,10 @@ public class GolemBossController : BossController
             DoAttack();
         }
 
-        if (health.currentHealth%powerAttackThreshold == 0 && !hasPowerAttacked)
+        if(health.currentHealth < powerAttackThreshold)
         {
-            hasPowerAttacked = true;
             DoPowerAttack();
-        }
-        else if (!(health.currentHealth % powerAttackThreshold == 0)){
-            hasPowerAttacked = false;
+            powerAttackThreshold -= thresholdChange;
         }
     }
 
@@ -75,5 +73,16 @@ public class GolemBossController : BossController
         currentAttack = burstAttack;
 
         StartAttackWindup();
+    }
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (attackOccured)
+        {
+            if (other.CompareTag("Player"))
+            {
+                other.GetComponent<Health>().TakeDamage(meleeAttack.attackDamage);
+            }
+        }
     }
 }

@@ -11,14 +11,10 @@ public class BossEngagedState : BossState
 
     public override void EnterState()
     {
-        Debug.Log("Enter Engaged");
-
-
         player = GameObject.Find("Player");
 
         bossMovement = GetComponent<BossMovement>();
         bossMovement.movementEnabled = true;
-
     }
 
     public override void UpdateState()
