@@ -27,9 +27,10 @@ public class BeastBossController : BossController
     }
 
     // Update is called once per frame
-    void Update()
+    protected override void Update()
     {
-        
+        base.Update();
+
         if (stateMachine.CurrentState() is BossEngagedState && CanAttack())
         {
             Debug.Log("1");
@@ -60,8 +61,6 @@ public class BeastBossController : BossController
 
         // Attack Selection Logic
                 
-        
-
         if (CanShockwave())
         {
             Debug.Log("ShockwaveAttack");

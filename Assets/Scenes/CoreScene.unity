@@ -787,7 +787,7 @@ MonoBehaviour:
   windupTime: 0
   followThroughTime: 0
   baseProjectile: {fileID: 9144090268408478084, guid: 651e7915bd794cc44ad10d4224ca44ef, type: 3}
-  projectileSpeed: 9.69
+  projectileSpeed: 20
 --- !u!114 &1009677675
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1151,7 +1151,7 @@ MonoBehaviour:
   ammoText: {fileID: 1129821881}
   healChargeText: {fileID: 1752980385}
   timerText: {fileID: 236993970}
-  GameManager: {fileID: 1930451842}
+  gameManager: {fileID: 1930451844}
   playerMaxHealth: 0
   bossMaxHealth: 0
 --- !u!4 &1184229506
@@ -1232,7 +1232,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 9.276701
+  orthographic size: 5.31
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -1341,6 +1341,50 @@ MonoBehaviour:
     mipBias: 0
     varianceClampScale: 0.9
     contrastAdaptiveSharpening: 0
+--- !u!1 &1284980088
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1284980090}
+  - component: {fileID: 1284980089}
+  m_Layer: 0
+  m_Name: SceneManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1284980089
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1284980088}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e54a6b87842d635418af2bc3ce81400f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &1284980090
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1284980088}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 7.0581417, y: -1.8583168, z: -0.156793}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1535618386
 GameObject:
   m_ObjectHideFlags: 0
@@ -1780,7 +1824,7 @@ MonoBehaviour:
   m_Follow: {fileID: 1009677679}
   m_Lens:
     FieldOfView: 60
-    OrthographicSize: 9.276701
+    OrthographicSize: 5.31
     NearClipPlane: 0.3
     FarClipPlane: 1000
     Dutch: 0
@@ -1820,7 +1864,8 @@ SceneRoots:
   - {fileID: 1223269366}
   - {fileID: 2131914822}
   - {fileID: 1184229506}
-  - {fileID: 1897063337}
   - {fileID: 1930451843}
+  - {fileID: 1284980090}
+  - {fileID: 1897063337}
   - {fileID: 818942713}
   - {fileID: 1009677679}

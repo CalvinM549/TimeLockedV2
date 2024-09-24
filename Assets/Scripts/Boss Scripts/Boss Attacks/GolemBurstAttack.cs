@@ -11,21 +11,18 @@ public class GolemBurstAttack : BossAttack
     private Vector2 startArea;
 
     public AnimationCurve sizeCurve;
-
     public float elapsedTime = 0f;
+
+    public float damageDelay;
 
     public override void StartAttack(Transform target)
     {
-        elapsedTime = 0f;
-        Debug.Log("StartAttack");
-
         base.StartAttack(target);
+        Debug.Log("StartWindup");
+        elapsedTime = 0f;
+
 
         endArea.Set(attackRange*2, attackRange* 2);
-
-        warning = Instantiate(warningCircle, transform.position, transform.rotation);
-        StartCoroutine(WarningArea());
-        Destroy(warning, (windupTime+0.01f));
     }
 
     public override void ExecuteAttack()
@@ -33,25 +30,16 @@ public class GolemBurstAttack : BossAttack
         attackInProgress = true;
         Debug.Log("ExecuteAttack");
 
-        Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, attackRange);
-        foreach (Collider2D collider in colliders)
-        {
-            if (collider.CompareTag("Player"))
-            {
-                collider.GetComponent<Health>().TakeDamage(attackDamage);
-            }
-        }
+        warning = Instantiate(warningCircle, transform.position, transform.rotation);
+        StartCoroutine(AttackDelay());
+        Debug.Log("Test");
+
     }
 
-    public IEnumerator WarningArea()
+    public IEnumerator AttackDelay()
     {
-        while(elapsedTime < windupTime)
+        while(elapsedTime < damageDelay)
         {
-            if(warning == null)
-            {
-                yield break;
-            }
-
             elapsedTime += Time.deltaTime;
 
             float t = elapsedTime / windupTime;
@@ -63,7 +51,19 @@ public class GolemBurstAttack : BossAttack
 
             yield return null;
         }
-        
+
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, attackRange);
+        foreach (Collider2D collider in colliders)
+        {
+            if (collider.CompareTag("Player"))
+            {
+                collider.GetComponent<Health>().TakeDamage(attackDamage);
+            }
+        }
+
+        Destroy(warning);
+        attackInProgress = false;
+
     }
 
 }

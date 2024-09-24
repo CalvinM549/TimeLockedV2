@@ -8,6 +8,12 @@ public class GolemVialAttack : BossAttack
 {
 
     public GameObject vialPrefab;
+    public GameObject lightningVialPrefab;
+    public GameObject acidVialPrefab;
+    public GameObject iceVialPrefab;
+
+    private GameObject vial;
+
     public enum Vial { LIGHTNING, ACID, ICE }
     public Vial currentVial;
 
@@ -18,10 +24,6 @@ public class GolemVialAttack : BossAttack
 
     public int acidDamage;
     public float acidDuration;
-
-
-
-
 
     private int randomVial;
     private Transform currentTarget;
@@ -53,7 +55,6 @@ public class GolemVialAttack : BossAttack
 
     public void ThrowVial(Vial currentVial, Transform finalTarget)
     {
-        GameObject vial = Instantiate(vialPrefab, transform.position, transform.rotation);
 
 
         float distance = Vector3.Distance(finalTarget.position, transform.position);
@@ -65,12 +66,15 @@ public class GolemVialAttack : BossAttack
             //int damage, float area, Vector2 target, Vector3 rotation, float timeToImpact
 
             case Vial.LIGHTNING:
+                vial = Instantiate(lightningVialPrefab, transform.position, transform.rotation);
                 vial.GetComponent<LightningVial>().Initialize(lightningDamage, areaSize, finalTarget.position, rotationSpeed, delay, lightningDuration);
                 break;
             case Vial.ACID:
+                vial = Instantiate(acidVialPrefab, transform.position, transform.rotation);
                 vial.GetComponent<AcidVial>().Initialize(acidDamage, areaSize, finalTarget.position, rotationSpeed, delay, acidDuration);
                 break;
             case Vial.ICE:
+                vial = Instantiate(iceVialPrefab, transform.position, transform.rotation);
                 vial.GetComponent<IceVial>().Initialize(0, areaSize, finalTarget.position, rotationSpeed, delay, iceDuration);
                 break;
         }
@@ -79,7 +83,7 @@ public class GolemVialAttack : BossAttack
 
     private IEnumerator GetRandomVials(Transform finalTarget)
     {
-        int vialCount = Random.Range(0, 5);
+        int vialCount = Random.Range(1, 5);
         for (int i = 0; i < vialCount; i++)
         {
             currentVial = (Vial)UnityEngine.Random.Range(0, System.Enum.GetValues(typeof(Vial)).Length);
@@ -87,6 +91,8 @@ public class GolemVialAttack : BossAttack
             ThrowVial(currentVial, finalTarget);
             yield return new WaitForSeconds(0.3f);
         }
+
+        attackInProgress = false;
     }
 }
 

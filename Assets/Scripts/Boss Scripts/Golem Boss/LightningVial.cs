@@ -20,7 +20,7 @@ public class LightningVial : BaseVial
         spriteRenderer.sprite = areaSprite;
         spriteRenderer.color = Color.yellow;
 
-        Collider2D[] colliders = Physics2D.OverlapCircleAll(target, area);
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(target, area/2);
         foreach (Collider2D collider in colliders)
         {
             Debug.DrawLine(transform.position, collider.transform.position, Color.yellow, 2f);

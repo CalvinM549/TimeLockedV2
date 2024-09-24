@@ -8,11 +8,6 @@ public class BossStateMachine : MonoBehaviour
 
     private BossState currentState;
 
-    void Start()
-    {
-
-    }
-
     void Update()
     {
         if (currentState != null) 

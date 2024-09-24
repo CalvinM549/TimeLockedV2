@@ -7,10 +7,9 @@ using UnityEngine;
 
 public class GolemBossController : BossController
 {
-
-    public BossAttack meleeAttack;
-    public BossAttack vialAttack;
-    public BossAttack burstAttack;
+    private BossAttack meleeAttack;
+    private BossAttack vialAttack;
+    private BossAttack burstAttack;
 
     private bool hasPowerAttacked;
 
@@ -24,10 +23,13 @@ public class GolemBossController : BossController
     protected override void Start()
     {
         base.Start();
+        meleeAttack = attacks[0];
+        vialAttack = attacks[1];
+        burstAttack = attacks[2];
     }
 
     // Update is called once per frame
-    void Update()
+    protected override void Update()
     {
         if (stateMachine.CurrentState() is BossEngagedState && CanAttack())
         {
@@ -43,6 +45,7 @@ public class GolemBossController : BossController
             DoPowerAttack();
             powerAttackThreshold -= thresholdChange;
         }
+        base.Update();
     }
 
     protected override void EnableAttack()
@@ -55,16 +58,15 @@ public class GolemBossController : BossController
         {
             Debug.Log("MeleeAttackStart");
             currentAttack = meleeAttack;
-
-            StartAttackWindup();
         }
+
         else if (distanceToPlayer <= vialAttack.attackRange)
         {
             Debug.Log("VialAttackStart");
             currentAttack = vialAttack;
+        }
 
-            StartAttackWindup();
-        }        
+        StartAttackWindup();
     }
 
     private void DoPowerAttack()

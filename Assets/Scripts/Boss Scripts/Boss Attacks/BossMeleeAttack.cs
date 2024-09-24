@@ -30,9 +30,8 @@ public class BossMeleeAttack : BossAttack
         attackInProgress = true;
         Debug.Log("ExecuteAttack");
         movement.Dash(targetPosition, dashDistance);
+        attackInProgress = false;
     }
-
-
 
     // selects location to attack and enters windup
     // after windup, completes a short dash to target location and deals damage.

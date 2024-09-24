@@ -38,11 +38,11 @@ public class PlayerMeleeAttack : PlayerAttack
                     if (collider.CompareTag("Boss") || collider.CompareTag("Enemy"))
                     {
                         collider.GetComponent<Health>().TakeDamage(attackDamage);
-                    }
 
-                    if (GetComponent<PlayerController>().rangedAmmo <= 5)
-                    {
-                        GetComponent<PlayerController>().rangedAmmo++;
+                        if (GetComponent<PlayerController>().rangedAmmo < 5)
+                        {
+                            GetComponent<PlayerController>().rangedAmmo++;
+                        }
                     }
 
                 }

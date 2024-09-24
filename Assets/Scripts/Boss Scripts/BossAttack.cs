@@ -17,7 +17,6 @@ public abstract class BossAttack : MonoBehaviour
 
     public virtual void StartAttack(Transform target)
     {
-
         stateMachine = GetComponent<BossStateMachine>();
         stateMachine.ChangeState<BossWindupState>();
     }

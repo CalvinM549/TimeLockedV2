@@ -8,6 +8,7 @@ public class BossController : MonoBehaviour
 
     public Health health;
     public BossStateMachine stateMachine;
+    public BossMovement bossMovement;
 
     public BossAttack currentAttack;
     public List<BossAttack> attacks;
@@ -24,10 +25,21 @@ public class BossController : MonoBehaviour
         health = GetComponent<Health>();
         player = GameObject.FindWithTag("Player");
 
+        bossMovement = GetComponent<BossMovement>();
+        bossMovement.target = player.transform;
+
         stateMachine = GetComponent<BossStateMachine>();
         stateMachine.ChangeState<BossIdleState>();
 
         attackOccured = false;
+    }
+
+    protected virtual void Update()
+    {
+        if (stateMachine.CurrentState() is BossAttackingState && currentAttack.attackInProgress == false)
+        {
+            StartCoroutine(AttackReset(currentAttack.followThroughTime));
+        }
     }
 
     protected virtual void EnableAttack()
@@ -55,7 +67,7 @@ public class BossController : MonoBehaviour
         Debug.Log(currentAttack);
         currentAttack.ExecuteAttack();
 
-        StartCoroutine(AttackReset(currentAttack.followThroughTime));
+
     }
 
 

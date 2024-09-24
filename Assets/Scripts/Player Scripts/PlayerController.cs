@@ -51,6 +51,7 @@ public class PlayerController : MonoBehaviour
         if (Input.GetMouseButtonDown(0) && CanAttack())
         {
             currentAttack = meleeAttack;
+            uiManager.UpdateAmmoCount(rangedAmmo);
         }
         // Ranged Attack
         if (Input.GetMouseButtonDown(1) && rangedAmmo > 0 && CanAttack())
@@ -64,7 +65,6 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown("f") && healCharges > 0)
         {
             StartCoroutine(HealPlayer());
-            uiManager.UpdateAmmoCount(healCharges);
         }
 
         if(Input.GetKeyDown("space") && CanAttack())
@@ -99,6 +99,8 @@ public class PlayerController : MonoBehaviour
         yield return new WaitForSeconds(healTime);
         health.GainHealth(healAmount);
         healCharges--;
+
+        uiManager.UpdateHealCharges(healCharges);
     }
 
     public Vector2 PlayerToMouse()

@@ -20,7 +20,7 @@ public class UIManager : MonoBehaviour
 
     private GameObject player;
     private GameObject boss;
-    public GameObject GameManager;
+    public GameManager gameManager;
 
     public int playerMaxHealth;
     public int bossMaxHealth;
@@ -38,7 +38,7 @@ public class UIManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        timerText.text = gameManager.timer.ToString();
     }
 
     public void UpdateAmmoCount(int ammo)
