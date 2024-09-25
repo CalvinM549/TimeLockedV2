@@ -20,6 +20,8 @@ public class PlayerController : MonoBehaviour
     public float healTime;
     public int healAmount;
 
+    public bool healOccuring;
+
     public int rangedAmmo;
 
     public float attackCooldown;
@@ -31,7 +33,6 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        boss = GameObject.FindWithTag("Boss");
         rb = GetComponent<Rigidbody2D>();
         stateMachine = GetComponent<PlayerStateMachine>();
         health = GetComponent<Health>();
@@ -62,7 +63,7 @@ public class PlayerController : MonoBehaviour
         }
 
         // Heal
-        if (Input.GetKeyDown("f") && healCharges > 0)
+        if (Input.GetKeyDown("f") && healCharges > 0 && !healOccuring)
         {
             StartCoroutine(HealPlayer());
         }
@@ -73,11 +74,6 @@ public class PlayerController : MonoBehaviour
         }
 
         // boss health testing
-        if (Input.GetKeyDown("l"))
-        {
-            boss.GetComponent<Health>().TakeDamage(100);
-        }
-        //
 
         if (stateMachine.CurrentState() is PlayerEnabledState && currentAttack != null && (attackStarted == false))
         {
@@ -94,6 +90,7 @@ public class PlayerController : MonoBehaviour
 
     private IEnumerator HealPlayer()
     {
+        healOccuring = true;
         stateMachine.ChangeState<PlayerStunnedState>();
         GetComponent<PlayerStunnedState>().stunDuration = healTime;
         yield return new WaitForSeconds(healTime);
@@ -101,6 +98,7 @@ public class PlayerController : MonoBehaviour
         healCharges--;
 
         uiManager.UpdateHealCharges(healCharges);
+        healOccuring = false;
     }
 
     public Vector2 PlayerToMouse()

@@ -4,23 +4,46 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    public SceneManagerObj sceneManager;
+
+    public static GameManager instance; 
+
     public float timer;
     public float maxTime;
+    public bool timerActive;
+
+    private int currentLevel;
+    public bool bossOneDefeated;
+    public bool bossTwoDefeated;
+    public bool bossThreeDefeated;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
+        instance = this;
+
+        currentLevel = 0;
+
+        timerActive = true;
         timer = maxTime;
     }
 
     // Update is called once per frame
     void Update()
     {
-        timer -= Time.deltaTime;
-
-        if(timer <= 0)
+        if (timerActive)
         {
-            //TODO timer reset logic
+            timer -= Time.deltaTime;
+
+            if (timer <= 0)
+            {
+                sceneManager.GameReset();
+            }
         }
+    }
+
+    public void CheckBoss()
+    {
+
     }
 }

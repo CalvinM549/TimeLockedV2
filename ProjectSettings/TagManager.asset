@@ -9,6 +9,7 @@ TagManager:
   - Projectile
   - Wall
   - PlayerProjectile
+  - GroundObject
   layers:
   - Default
   - TransparentFX

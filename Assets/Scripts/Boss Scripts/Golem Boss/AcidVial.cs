@@ -14,8 +14,6 @@ public class AcidVial : BaseVial
     {
         base.Initialize(damage, area, target, rotationSpeed, timeToImpact, vialDuration);
 
-        playerHealth = GameObject.Find("Player").GetComponent<Health>();
-
         StartCoroutine(AcidDamage());
     }
 
@@ -23,7 +21,6 @@ public class AcidVial : BaseVial
     protected override void OnImpact()
     {
         VialEffects();
-        Debug.DrawLine(transform.position, target, Color.green, 4);
         Destroy(gameObject, vialDuration);
     }
 
@@ -39,6 +36,7 @@ public class AcidVial : BaseVial
 
         if (collision.gameObject.tag == "Player")
         {
+            playerHealth = collision.GetComponent<Health>();
             Debug.Log("Player Entered Acid Area");
             playerTakingDamage = true;
         }

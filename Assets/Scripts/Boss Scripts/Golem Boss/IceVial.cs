@@ -12,14 +12,11 @@ public class IceVial : BaseVial
     {
         base.Initialize(damage, area, target, rotationSpeed, timeToImpact, vialDuration);
 
-        playerMovement = GameObject.Find("Player").GetComponent<PlayerMovement>();
-
     }
 
     protected override void OnImpact()
     {
         VialEffects();
-        Debug.DrawLine(transform.position, target, Color.blue, 4);
         Destroy(gameObject, vialDuration);
     }
 
@@ -34,7 +31,9 @@ public class IceVial : BaseVial
         if (collision.gameObject.tag == "Player")
         {
             Debug.Log("Player Entered Ice Area");
-            playerMovement.Slow(slowValue);
+            collision.GetComponent<PlayerMovement>().Slow(slowValue);
+            
+            //playerMovement.Slow(slowValue);
         }
     }
 
@@ -43,7 +42,7 @@ public class IceVial : BaseVial
         if (collision.gameObject.tag == "Player")
         {
             Debug.Log("Player Exited Ice Area");
-            playerMovement.EndSlow();
+            collision.GetComponent<PlayerMovement>().EndSlow();
         }
     }
 }

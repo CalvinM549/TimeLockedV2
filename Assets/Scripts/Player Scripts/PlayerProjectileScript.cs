@@ -35,7 +35,7 @@ public class PlayerProjectileScript : MonoBehaviour
         }
         
         //if ((collision.CompareTag("Boss")) || collision.CompareTag("Projectile"))
-        if(!(collision.CompareTag("Player")))
+        if(!(collision.CompareTag("Player")) && !(collision.CompareTag("GroundObject")))
         {
             Destroy(gameObject);
         }

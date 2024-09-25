@@ -29,10 +29,13 @@ public class UIManager : MonoBehaviour
     void Start()
     {
         player = GameObject.FindWithTag("Player");
-        boss = GameObject.FindWithTag("Boss");
 
         playerMaxHealth = player.GetComponent<Health>().maxHealth;
-        bossMaxHealth = boss.GetComponent<Health>().maxHealth;
+
+        ammoText.text = player.GetComponent<PlayerController>().rangedAmmo.ToString();
+        healChargeText.text = player.GetComponent<PlayerController>().healCharges.ToString();
+
+
     }
 
     // Update is called once per frame
@@ -51,9 +54,12 @@ public class UIManager : MonoBehaviour
         healChargeText.text = (charges.ToString());
     }
 
-    public void UpdateTimerText()
+    public void GetNewObjects()
     {
-        
+        GameObject newBoss = GameObject.FindWithTag("Boss");
+        boss = newBoss;
+        bossMaxHealth = newBoss.GetComponent<Health>().maxHealth;
+        UpdateHealthBar(bossMaxHealth, boss);
     }
 
     public void UpdateHealthBar(int newHealth, GameObject damagedObject)

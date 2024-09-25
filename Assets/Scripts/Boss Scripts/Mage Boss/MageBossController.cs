@@ -4,12 +4,22 @@ using UnityEngine;
 
 public class MageBossController : BossController
 {
+    public GameObject timeArtifact;
+    private Health artifactHealth;
+
     public int fireballAttackThreshold;
-    public int thresholdChange;
+    public int fireballThresholdChange;
+
+    public int turretSpawnThreshold;
+    public int turretThresholdChange;
+
+    public int maxTurrets;
 
     protected override void Start()
     {
         base.Start();
+        artifactHealth = timeArtifact.GetComponent<Health>();
+        maxTurrets = 0;
     }
 
     // Update is called once per frame
@@ -25,29 +35,38 @@ public class MageBossController : BossController
             DoAttack();
         }
 
+        if(health.currentHealth < turretSpawnThreshold)
+        {
+            maxTurrets++;
+            turretSpawnThreshold -= turretThresholdChange;
+        }
+        
         base.Update();
+
+        
 
     }
     protected override void EnableAttack()
     {
         base.EnableAttack();
 
-        if (health.currentHealth < fireballAttackThreshold)
-        {
-            currentAttack = attacks[1]; // sets to fireball attack
-            fireballAttackThreshold -= thresholdChange;
-        }
 
-
-        else if (health.currentHealth < health.maxHealth/2 && attacks[2].GetComponent<MageOrbitalTurretAttack>().turrets.Count < 3)
+        if (attacks[2].GetComponent<MageOrbitalTurretAttack>().turrets.Count < maxTurrets)
         {
             currentAttack = attacks[2];
+        }
+        
+        else if (artifactHealth.currentHealth < fireballAttackThreshold)
+        {
+            currentAttack = attacks[1]; // sets to fireball attack
+            fireballAttackThreshold -= fireballThresholdChange;
         }
 
         else
         {
             currentAttack = attacks[0];
         }
+
 
         StartAttackWindup();
     }

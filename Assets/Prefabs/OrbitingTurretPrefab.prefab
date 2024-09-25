@@ -140,14 +140,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackInProgress: 0
-  attackDamage: 15
+  attackDamage: 10
   attackRange: 0
   windupTime: 0
   followThroughTime: 0
   projectile: {fileID: 1602725527559018760, guid: 5be28bf254c844b4ebc93ee9c9fafa93, type: 3}
-  waveAngle: 120
-  projectileCount: 6
-  projectileSpeed: 5
+  waveAngle: 360
+  projectileCount: 8
+  projectileSpeed: 2
 --- !u!50 &4978009807149035879
 Rigidbody2D:
   serializedVersion: 4

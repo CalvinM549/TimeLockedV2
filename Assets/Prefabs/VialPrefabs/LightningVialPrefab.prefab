@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 4087858812572723391}
   m_Layer: 0
   m_Name: LightningVialPrefab
-  m_TagString: Untagged
+  m_TagString: GroundObject
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
