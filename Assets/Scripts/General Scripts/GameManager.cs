@@ -12,20 +12,18 @@ public class GameManager : MonoBehaviour
     public float maxTime;
     public bool timerActive;
 
-    private int currentLevel;
-    public bool bossOneDefeated;
-    public bool bossTwoDefeated;
-    public bool bossThreeDefeated;
+    public bool bossDefeated;
+    public int currentLevel;
 
     // Start is called before the first frame update
     void Awake()
     {
         instance = this;
 
-        currentLevel = 0;
-
         timerActive = true;
         timer = maxTime;
+
+        bossDefeated = false;
     }
 
     // Update is called once per frame
@@ -40,10 +38,9 @@ public class GameManager : MonoBehaviour
                 sceneManager.GameReset();
             }
         }
-    }
 
-    public void CheckBoss()
-    {
 
     }
+
+
 }

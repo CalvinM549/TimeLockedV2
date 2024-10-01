@@ -5,7 +5,7 @@ using static GolemBossController;
 
 public class BossController : MonoBehaviour
 {
-
+    protected GameManager gameManager;
     public Health health;
     public BossStateMachine stateMachine;
     public BossMovement bossMovement;
@@ -22,6 +22,8 @@ public class BossController : MonoBehaviour
 
     protected virtual void Start()
     {
+        gameManager = GameManager.instance;
+
         health = GetComponent<Health>();
         player = GameObject.FindWithTag("Player");
 
@@ -99,6 +101,11 @@ public class BossController : MonoBehaviour
         attackOccured = false;
 
         Debug.Log("ResetToEngaged");
+    }
+
+    private void OnDestroy()
+    {
+        gameManager.bossDefeated = true;
     }
 
 }

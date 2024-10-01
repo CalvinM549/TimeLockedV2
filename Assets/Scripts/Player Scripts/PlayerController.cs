@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+
+    public static PlayerController instance;
+
     private Rigidbody2D rb;
     private GameObject boss;
     private PlayerMovement movement;
@@ -30,9 +33,14 @@ public class PlayerController : MonoBehaviour
     public bool attackStarted;
     public bool attackExecuted;
 
-    // Start is called before the first frame update
+    void Awake()
+    {
+        instance = this;
+    }
+
     void Start()
     {
+
         rb = GetComponent<Rigidbody2D>();
         stateMachine = GetComponent<PlayerStateMachine>();
         health = GetComponent<Health>();

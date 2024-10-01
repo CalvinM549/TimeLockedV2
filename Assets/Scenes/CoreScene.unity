@@ -1295,7 +1295,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1284980090}
-  - component: {fileID: 1284980089}
   - component: {fileID: 1284980091}
   m_Layer: 0
   m_Name: SceneManager
@@ -1304,18 +1303,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1284980089
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1284980088}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e54a6b87842d635418af2bc3ce81400f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &1284980090
 Transform:
   m_ObjectHideFlags: 0
@@ -1343,10 +1330,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 722ae8ff17d26df4d9e5ce9d760c473c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameManager: {fileID: 1930451844}
   uiManager: {fileID: 1184229505}
-  currentScene: 
   currentLevelScene: 
+  levelNames:
+  - IntroScene
+  - BossOneScene
+  - BossTwoScene
+  - BossThreeScene
 --- !u!1 &1519065435
 GameObject:
   m_ObjectHideFlags: 0
@@ -1759,11 +1749,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sceneManager: {fileID: 1284980091}
   timer: 0
-  maxTime: 100
+  maxTime: 180
   timerActive: 0
-  bossOneDefeated: 0
-  bossTwoDefeated: 0
-  bossThreeDefeated: 0
+  bossDefeated: 1
+  currentLevel: 1
 --- !u!1 &2107692916
 GameObject:
   m_ObjectHideFlags: 0

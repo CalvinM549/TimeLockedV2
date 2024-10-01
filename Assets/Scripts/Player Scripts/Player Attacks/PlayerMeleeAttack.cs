@@ -27,8 +27,6 @@ public class PlayerMeleeAttack : PlayerAttack
         {
             if (!(collider.CompareTag("Player")) && !(collider.CompareTag("Wall")))
             {
-                Debug.Log(Vector2.Angle(transform.position, collider.transform.position));
-                Debug.Log(Vector2.Angle(transform.position, mouseVector) + meleeAngle);
                 //if ((Vector2.Angle(transform.position, collider.transform.position) - Vector2.Angle(transform.position, mouseVector) < mouseVector + meleeAngle))
                 if (Vector2.Angle(mouseVector, (collider.transform.position - transform.position)) <= meleeAngle)
                 {

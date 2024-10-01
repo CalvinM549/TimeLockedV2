@@ -18,17 +18,15 @@ public class AcidVial : BaseVial
     }
 
     // Update is called once per frame
-    protected override void OnImpact()
-    {
-        VialEffects();
-        Destroy(gameObject, vialDuration);
-    }
+
 
     protected override void VialEffects()
     {
         circleCollider.enabled = true;
         spriteRenderer.sprite = areaSprite;
-        spriteRenderer.color = Color.green;
+        Color col = Color.green;
+        col.a = 0.3f;
+        spriteRenderer.color = col;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

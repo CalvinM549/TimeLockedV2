@@ -8,6 +8,7 @@ public abstract class BaseVial : MonoBehaviour
 
     protected SpriteRenderer spriteRenderer;
     protected CircleCollider2D circleCollider;
+    protected ParticleSystem particleSystem;
 
     protected Vector2 target;
     protected Vector2 startPosition;
@@ -36,6 +37,7 @@ public abstract class BaseVial : MonoBehaviour
         circleCollider = GetComponent<CircleCollider2D>();
         circleCollider.radius = area;
 
+        particleSystem = GetComponent<ParticleSystem>();
         spriteRenderer = GetComponent<SpriteRenderer>();
 
         startPosition = transform.position;
@@ -60,7 +62,12 @@ public abstract class BaseVial : MonoBehaviour
         OnImpact();
     }
 
-    protected abstract void OnImpact();
+    protected virtual void OnImpact()
+    {
+        particleSystem.Play();
+        VialEffects();
+        Destroy(gameObject, vialDuration);
+    }
 
     protected abstract void VialEffects();
 

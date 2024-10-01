@@ -8,13 +8,6 @@ public class LightningVial : BaseVial
     // Start is called before the first frame update
 
 
-    protected override void OnImpact()
-    {
-        VialEffects();
-        Debug.DrawLine(transform.position, target, Color.yellow, 4);
-        Destroy(gameObject, vialDuration);
-    }
-
     protected override void VialEffects()
     {
         spriteRenderer.sprite = areaSprite;

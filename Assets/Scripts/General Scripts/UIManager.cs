@@ -6,6 +6,8 @@ using TMPro;
 public class UIManager : MonoBehaviour
 {
     //public TextMeshProUGUI 
+    public static UIManager instance;
+
 
     public UnityEngine.UI.Image bossHealthLeft;
     public UnityEngine.UI.Image bossHealthRight;
@@ -25,7 +27,10 @@ public class UIManager : MonoBehaviour
     public int playerMaxHealth;
     public int bossMaxHealth;
 
-    // Start is called before the first frame update
+    void Awake()
+    {
+        instance = this;
+    }
     void Start()
     {
         player = GameObject.FindWithTag("Player");
@@ -34,8 +39,6 @@ public class UIManager : MonoBehaviour
 
         ammoText.text = player.GetComponent<PlayerController>().rangedAmmo.ToString();
         healChargeText.text = player.GetComponent<PlayerController>().healCharges.ToString();
-
-
     }
 
     // Update is called once per frame
@@ -54,12 +57,15 @@ public class UIManager : MonoBehaviour
         healChargeText.text = (charges.ToString());
     }
 
-    public void GetNewObjects()
+    public IEnumerator GetNewObjects()
     {
+        Debug.Log("NewBoss searching");
+        yield return new WaitForSeconds(0.1f);
         GameObject newBoss = GameObject.FindWithTag("Boss");
         boss = newBoss;
         bossMaxHealth = newBoss.GetComponent<Health>().maxHealth;
         UpdateHealthBar(bossMaxHealth, boss);
+        Debug.Log("NewBoss found");
     }
 
     public void UpdateHealthBar(int newHealth, GameObject damagedObject)

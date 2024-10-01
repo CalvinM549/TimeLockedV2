@@ -17,7 +17,6 @@ public class BeastShockwaveAttack : BossAttack
         Debug.Log("StartAttack");
 
         base.StartAttack(target);
-        // TODO Draw warning area
     }
 
     public override void ExecuteAttack()
@@ -28,9 +27,6 @@ public class BeastShockwaveAttack : BossAttack
 
         GameObject Shockwave = Instantiate(shockwavePrefab, transform.position, transform.rotation);
         Shockwave.GetComponent<ShockwavePrefabScript>().Initialize(expansionSpeed, maxAreaSize, shockwaveDuration, attackDamage);
-
-
-
     }
 
 

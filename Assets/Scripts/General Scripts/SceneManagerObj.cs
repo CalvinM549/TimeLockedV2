@@ -6,43 +6,47 @@ using UnityEngine.SceneManagement;
 
 public class SceneManagerObj : MonoBehaviour
 {
-    public UIManager uiManager;
 
-    public string currentScene;
+    public static SceneManagerObj instance;
+
+
+    public UIManager uiManager;
+    private GameManager gameManager;
     public string currentLevelScene;
-    // Start is called before the first frame update
+    public string[] levelNames;
+
+    void Awake()
+    {
+        instance = this;
+    }
+
     void Start()
     {
         SceneManager.LoadScene("IntroScene", LoadSceneMode.Additive);
         currentLevelScene = "IntroScene";
+        gameManager = GameManager.instance;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown("1"))
-        {
-            LoadTransition();
-            LoadLevelScene("BossOneScene");    
-        }
-        if (Input.GetKeyDown("2"))
-        {
-            LoadTransition();
-            LoadLevelScene("BossTwoScene");
-        }
-        if (Input.GetKeyDown("3"))
-        {  
-            LoadTransition();
-            LoadLevelScene("BossThreeScene");
-        }
+
+    }
+
+    public void LoadNextLevel()
+    {
+        LoadLevelScene(levelNames[gameManager.currentLevel]);
     }
 
     public void LoadLevelScene(string newLevel)
     {
+        Debug.Log("Loading "+newLevel);
         SceneManager.UnloadSceneAsync("StairwellScene");
         SceneManager.LoadScene(newLevel, LoadSceneMode.Additive);
         currentLevelScene = newLevel;
-        uiManager.GetNewObjects();
+        StartCoroutine(uiManager.GetNewObjects());
+        gameManager.currentLevel++;
+        gameManager.bossDefeated = false;
     }
 
     public void LoadTransition()

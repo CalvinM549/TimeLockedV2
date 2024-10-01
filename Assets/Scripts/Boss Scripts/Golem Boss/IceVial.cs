@@ -14,17 +14,14 @@ public class IceVial : BaseVial
 
     }
 
-    protected override void OnImpact()
-    {
-        VialEffects();
-        Destroy(gameObject, vialDuration);
-    }
 
     protected override void VialEffects()
     {
         circleCollider.enabled = true;
         spriteRenderer.sprite = areaSprite;
-        spriteRenderer.color = Color.cyan;
+        Color col = Color.cyan;
+        col.a = 0.3f;
+        spriteRenderer.color = col;
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {

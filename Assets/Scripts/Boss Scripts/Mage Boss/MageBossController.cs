@@ -15,11 +15,17 @@ public class MageBossController : BossController
 
     public int maxTurrets;
 
+    private float lastTeleportTime;
+    private float currentTeleportCooldown;
+    public float minTeleportCooldown;
+    public float maxTeleportCooldown;
+
     protected override void Start()
     {
         base.Start();
         artifactHealth = timeArtifact.GetComponent<Health>();
         maxTurrets = 0;
+        currentTeleportCooldown = Random.Range(minTeleportCooldown, maxTeleportCooldown);
     }
 
     // Update is called once per frame
@@ -35,15 +41,15 @@ public class MageBossController : BossController
             DoAttack();
         }
 
-        if(health.currentHealth < turretSpawnThreshold)
+        if (health.currentHealth < turretSpawnThreshold)
         {
             maxTurrets++;
             turretSpawnThreshold -= turretThresholdChange;
         }
-        
+
         base.Update();
 
-        
+
 
     }
     protected override void EnableAttack()
@@ -55,7 +61,14 @@ public class MageBossController : BossController
         {
             currentAttack = attacks[2];
         }
-        
+
+        else if (CanTeleport(currentTeleportCooldown))
+        {
+            currentAttack = attacks[3];
+            lastTeleportTime = Time.time;
+            currentTeleportCooldown = Random.Range(minTeleportCooldown, maxTeleportCooldown);
+        }
+
         else if (artifactHealth.currentHealth < fireballAttackThreshold)
         {
             currentAttack = attacks[1]; // sets to fireball attack
@@ -75,5 +88,11 @@ public class MageBossController : BossController
     {
         yield return new WaitForSeconds(1f);
     }
+
+    private bool CanTeleport(float teleportCooldown)
+    {
+        return Time.time >= teleportCooldown + lastTeleportTime;
+    }
+
 }
 

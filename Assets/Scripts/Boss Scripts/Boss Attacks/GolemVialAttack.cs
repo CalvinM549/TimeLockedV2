@@ -14,6 +14,9 @@ public class GolemVialAttack : BossAttack
 
     private GameObject vial;
 
+    public int minVials;
+    public int maxVials;
+
     public enum Vial { LIGHTNING, ACID, ICE }
     public Vial currentVial;
 
@@ -83,7 +86,7 @@ public class GolemVialAttack : BossAttack
 
     private IEnumerator GetRandomVials(Transform finalTarget)
     {
-        int vialCount = Random.Range(1, 5);
+        int vialCount = Random.Range(minVials, maxVials);
         for (int i = 0; i < vialCount; i++)
         {
             currentVial = (Vial)UnityEngine.Random.Range(0, System.Enum.GetValues(typeof(Vial)).Length);
