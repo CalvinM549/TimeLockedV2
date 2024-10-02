@@ -55,6 +55,10 @@ public class SceneManagerObj : MonoBehaviour
         SceneManager.LoadScene("StairwellScene", LoadSceneMode.Additive);
     }
 
+    public string CurrentSceneName()
+    {
+        return currentLevelScene;
+    }
     
 
     // occurs when the player dies, or when the timer reaches 0

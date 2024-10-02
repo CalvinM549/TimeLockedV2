@@ -9,6 +9,7 @@ public abstract class BaseVial : MonoBehaviour
     protected SpriteRenderer spriteRenderer;
     protected CircleCollider2D circleCollider;
     protected ParticleSystem particleSystem;
+    protected Color col;
 
     protected Vector2 target;
     protected Vector2 startPosition;
@@ -66,13 +67,13 @@ public abstract class BaseVial : MonoBehaviour
     {
         particleSystem.Play();
         VialEffects();
+        circleCollider.enabled = true;
+        spriteRenderer.sprite = areaSprite;
         Destroy(gameObject, vialDuration);
     }
 
     protected abstract void VialEffects();
 
-
- 
 
 
 }

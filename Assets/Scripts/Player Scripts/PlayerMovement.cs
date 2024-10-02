@@ -14,11 +14,15 @@ public class PlayerMovement : MonoBehaviour
     public bool movementEnabled;
 
     private Rigidbody2D rb;
+    private SpriteRenderer spriteRenderer;
+    Animator anim;
 
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        anim = GetComponent<Animator>();
         currentSpeed = baseSpeed;
     }
 
@@ -35,11 +39,16 @@ public class PlayerMovement : MonoBehaviour
                 Dash();
             }
         }
+        UpdateSprite();
     }
 
     void FixedUpdate()
     {
-        rb.velocity += new Vector2(horizontal, vertical) * Time.deltaTime * currentSpeed;
+        Vector2 movementDirection = new Vector2(horizontal, vertical);
+        rb.velocity = movementDirection * currentSpeed;
+
+        //original movement
+        //rb.velocity += new Vector2(horizontal, vertical) * Time.deltaTime * currentSpeed;
     }
 
     public void Slow(float slowValue)
@@ -65,5 +74,27 @@ public class PlayerMovement : MonoBehaviour
     public void PushPlayer(Vector2 direction, float force)
     {
         rb.AddForce(direction * force, ForceMode2D.Impulse);
+    }
+
+
+    private void UpdateSprite()
+    {
+        if (horizontal > 0)
+        {
+            spriteRenderer.flipX = true;
+        }
+        else if (horizontal < 0)
+        {
+            spriteRenderer.flipX = false;
+        }
+
+        if(horizontal != 0 || vertical != 0)
+        {
+            anim.SetBool("isMoving", true);
+        }
+        else
+        {
+            anim.SetBool("isMoving", false);
+        }
     }
 }

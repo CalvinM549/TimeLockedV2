@@ -10,17 +10,17 @@ public class LightningVial : BaseVial
 
     protected override void VialEffects()
     {
-        spriteRenderer.sprite = areaSprite;
-        spriteRenderer.color = Color.yellow;
+        col = Color.yellow;
+        col.a = 0.3f;
+        spriteRenderer.color = col;
+    }
 
-        Collider2D[] colliders = Physics2D.OverlapCircleAll(target, area/2);
-        foreach (Collider2D collider in colliders)
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Player")
         {
-            Debug.DrawLine(transform.position, collider.transform.position, Color.yellow, 2f);
-            if (collider.CompareTag("Player"))
-            {
-                collider.GetComponent<Health>().TakeDamage(damage);
-            }
+
+            collision.GetComponent<Health>().TakeDamage(damage);
         }
     }
 }

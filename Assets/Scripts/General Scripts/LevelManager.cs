@@ -21,6 +21,7 @@ public class LevelManager : MonoBehaviour
         gameManager = GameManager.instance;
 
         player.transform.position = spawnPosition;
+
     }
 
     // Update is called once per frame
@@ -31,7 +32,8 @@ public class LevelManager : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (gameManager.bossDefeated && other.CompareTag("Player"))
+        Debug.Log(gameObject.name);
+        if ((gameManager.bossDefeated || sceneManager.CurrentSceneName() == "IntroScene") && other.CompareTag("Player"))
         {
             if (isTransitionScene)
             {

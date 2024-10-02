@@ -77,7 +77,7 @@ public class MageBossController : BossController
 
         else
         {
-            currentAttack = attacks[0];
+            currentAttack = attacks[4];
         }
 
 

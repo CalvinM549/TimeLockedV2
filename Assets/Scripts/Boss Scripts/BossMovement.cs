@@ -7,13 +7,17 @@ public class BossMovement : MonoBehaviour
 {
     public float movementSpeed;
     public bool movementEnabled;
+    private Vector2 moveVector;
+
     public Transform target;
     private Rigidbody2D rb;
+    private SpriteRenderer spriteRenderer;
 
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     public void SetTarget(Transform target)
@@ -33,7 +37,7 @@ public class BossMovement : MonoBehaviour
     private void MoveTowardsTarget()
     {
         Vector2 direction = (target.position - transform.position).normalized;
-        Vector2 moveVector = direction * movementSpeed * Time.fixedDeltaTime;
+        moveVector = direction * movementSpeed * Time.fixedDeltaTime;
         
         //rb.MovePosition(rb.position + moveVector);
         rb.velocity += moveVector * Time.deltaTime * movementSpeed;
@@ -46,5 +50,15 @@ public class BossMovement : MonoBehaviour
 
         rb.AddForce(dashDirection * dashForce, ForceMode2D.Impulse);
     }
-
+    private void UpdateSprite()
+    {
+        //if (moveVector)
+        {
+            spriteRenderer.flipX = true;
+        }
+        //else if (horizontal < 0)
+        {
+            spriteRenderer.flipX = false;
+        }
+    }
 }

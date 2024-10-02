@@ -22,9 +22,7 @@ public class AcidVial : BaseVial
 
     protected override void VialEffects()
     {
-        circleCollider.enabled = true;
-        spriteRenderer.sprite = areaSprite;
-        Color col = Color.green;
+        col = Color.green;
         col.a = 0.3f;
         spriteRenderer.color = col;
     }

@@ -17,9 +17,7 @@ public class IceVial : BaseVial
 
     protected override void VialEffects()
     {
-        circleCollider.enabled = true;
-        spriteRenderer.sprite = areaSprite;
-        Color col = Color.cyan;
+        col = Color.cyan;
         col.a = 0.3f;
         spriteRenderer.color = col;
     }

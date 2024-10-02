@@ -8,6 +8,9 @@ public class MageTeleport : BossAttack
 
     public Vector2[] teleportPoints;
 
+    private int chosenPoint;
+    private int lastPoint;
+
     // Warning visual variables
     public GameObject warning;
     public GameObject warningCircle;
@@ -38,11 +41,15 @@ public class MageTeleport : BossAttack
                 collider.GetComponent<Health>().TakeDamage(attackDamage);
             }
         }
+
+
+        while(chosenPoint == lastPoint)
+        {
+            chosenPoint = Random.Range(0, teleportPoints.Length);
+        }
         
-        int chosenPoint = Random.Range(0, teleportPoints.Length);
-
         gameObject.transform.position = teleportPoints[chosenPoint];
-
+        lastPoint = chosenPoint;
 
     }
 

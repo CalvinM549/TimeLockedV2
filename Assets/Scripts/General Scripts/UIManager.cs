@@ -19,6 +19,7 @@ public class UIManager : MonoBehaviour
     public TextMeshProUGUI healChargeText;
 
     public TextMeshProUGUI timerText;
+    public UnityEngine.UI.Image timerImage;
 
     private GameObject player;
     private GameObject boss;
@@ -45,6 +46,8 @@ public class UIManager : MonoBehaviour
     void Update()
     {
         timerText.text = gameManager.timer.ToString();
+        timerImage.fillAmount = gameManager.timer / gameManager.maxTime;
+
     }
 
     public void UpdateAmmoCount(int ammo)
