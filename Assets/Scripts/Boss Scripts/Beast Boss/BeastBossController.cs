@@ -31,16 +31,6 @@ public class BeastBossController : BossController
     {
         base.Update();
 
-        if (stateMachine.CurrentState() is BossEngagedState && CanAttack())
-        {
-            Debug.Log("1");
-            EnableAttack();
-        }
-        if (stateMachine.CurrentState() is BossAttackingState && attackOccured == false)
-        {
-            DoAttack();
-        }
-
         if (health.currentHealth <= health.maxHealth/2 && !phaseChanged)
         {
             PhaseChange();

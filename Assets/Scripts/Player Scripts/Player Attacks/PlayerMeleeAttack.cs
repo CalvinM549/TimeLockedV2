@@ -8,6 +8,11 @@ public class PlayerMeleeAttack : PlayerAttack
     public float meleeRange;
     public float meleeAngle;
 
+    public GameObject animation;
+    public float sizeVal;
+
+    public float angle;
+    public Quaternion q;
 
     public override void StartAttack()
     {
@@ -19,9 +24,16 @@ public class PlayerMeleeAttack : PlayerAttack
 
     public override void ExecuteAttack()
     {
+
         Vector3 mouseVector = GetComponent<PlayerController>().PlayerToMouse();
         Collider2D[] hitColliders = Physics2D.OverlapCircleAll(transform.position, meleeRange);
-        Debug.DrawRay(transform.position, mouseVector, Color.green, 2, false);
+        //Debug.DrawRay(transform.position, mouseVector, Color.green, 2, false);
+
+        angle = Mathf.Atan2(mouseVector.y, mouseVector.x) * Mathf.Rad2Deg;
+        q = Quaternion.Euler(0f, 0f, angle-90);
+        GameObject anim = Instantiate(animation, transform.position, q);
+        anim.transform.parent = transform;
+        anim.transform.localScale = new Vector3(sizeVal, sizeVal, 0f);
 
         foreach (Collider2D collider in hitColliders)
         {

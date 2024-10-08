@@ -15,7 +15,12 @@ public class UIManager : MonoBehaviour
     public UnityEngine.UI.Image playerHealthBar;
     public UnityEngine.UI.Image playerHealthBarGhost;
 
-    public TextMeshProUGUI ammoText;
+    //public TextMeshProUGUI ammoText;
+    private float maxAmmo;
+    public UnityEngine.UI.Image ammoImage;
+
+    public Sprite[] HealChargeSpites;
+    public UnityEngine.UI.Image healChargeImage;
     public TextMeshProUGUI healChargeText;
 
     public TextMeshProUGUI timerText;
@@ -38,26 +43,35 @@ public class UIManager : MonoBehaviour
 
         playerMaxHealth = player.GetComponent<Health>().maxHealth;
 
-        ammoText.text = player.GetComponent<PlayerController>().rangedAmmo.ToString();
+        maxAmmo = player.GetComponent<PlayerController>().rangedAmmo;
         healChargeText.text = player.GetComponent<PlayerController>().healCharges.ToString();
     }
 
     // Update is called once per frame
     void Update()
     {
-        timerText.text = gameManager.timer.ToString();
-        timerImage.fillAmount = gameManager.timer / gameManager.maxTime;
+        UpdateTimer();
 
+    }
+
+    private void UpdateTimer()
+    {
+        int minutes = Mathf.FloorToInt(gameManager.timer / 60f);
+        int seconds = Mathf.FloorToInt(gameManager.timer - minutes * 60);
+
+        timerText.text = string.Format("{0:0}:{1:00}", minutes, seconds);
+        timerImage.fillAmount = gameManager.timer / gameManager.maxTime;
     }
 
     public void UpdateAmmoCount(int ammo)
     {
-        ammoText.text = (ammo.ToString());
+        //ammoText.text = (ammo.ToString());
+        ammoImage.fillAmount = (float)ammo / maxAmmo;
     }
 
     public void UpdateHealCharges(int charges)
     {
-        healChargeText.text = (charges.ToString());
+        healChargeImage.sprite = HealChargeSpites[charges];
     }
 
     public IEnumerator GetNewObjects()

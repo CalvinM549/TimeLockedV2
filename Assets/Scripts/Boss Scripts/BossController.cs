@@ -23,9 +23,9 @@ public class BossController : MonoBehaviour
     protected virtual void Start()
     {
         gameManager = GameManager.instance;
+        player = PlayerController.instance.gameObject;
 
         health = GetComponent<Health>();
-        player = GameObject.FindWithTag("Player");
 
         bossMovement = GetComponent<BossMovement>();
         bossMovement.target = player.transform;
@@ -38,6 +38,14 @@ public class BossController : MonoBehaviour
 
     protected virtual void Update()
     {
+        if (stateMachine.CurrentState() is BossEngagedState && CanAttack() && player != null)
+        {
+            EnableAttack();
+        }
+        if (stateMachine.CurrentState() is BossAttackingState && attackOccured == false)
+        {
+            DoAttack();
+        }
         if (stateMachine.CurrentState() is BossAttackingState && currentAttack.attackInProgress == false)
         {
             StartCoroutine(AttackReset(currentAttack.followThroughTime));

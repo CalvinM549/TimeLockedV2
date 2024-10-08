@@ -31,15 +31,7 @@ public class MageBossController : BossController
     // Update is called once per frame
     protected override void Update()
     {
-        if (stateMachine.CurrentState() is BossEngagedState && CanAttack())
-        {
-            EnableAttack();
-        }
-
-        if (stateMachine.CurrentState() is BossAttackingState && attackOccured == false)
-        {
-            DoAttack();
-        }
+        base.Update();
 
         if (health.currentHealth < turretSpawnThreshold)
         {
@@ -47,7 +39,6 @@ public class MageBossController : BossController
             turretSpawnThreshold -= turretThresholdChange;
         }
 
-        base.Update();
 
 
 

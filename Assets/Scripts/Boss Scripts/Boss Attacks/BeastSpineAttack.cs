@@ -48,5 +48,6 @@ public class BeastSpineAttack : BossAttack
             GameObject spine = Instantiate(spineProjectile, transform.position, Quaternion.Euler(0, 0, currentRotation + 90));
             spine.GetComponent<SpinePrefabScript>().Initialize(attackDamage, projectileSpeed, angleVariationVal);
         }
+        attackInProgress = false;
     }
 }

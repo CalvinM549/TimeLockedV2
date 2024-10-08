@@ -22,9 +22,14 @@ public class SceneManagerObj : MonoBehaviour
 
     void Start()
     {
+        gameManager = GameManager.instance;
+        StartGame();
+    }
+
+    public void StartGame()
+    {
         SceneManager.LoadScene("IntroScene", LoadSceneMode.Additive);
         currentLevelScene = "IntroScene";
-        gameManager = GameManager.instance;
     }
 
     // Update is called once per frame
@@ -60,12 +65,11 @@ public class SceneManagerObj : MonoBehaviour
         return currentLevelScene;
     }
     
+    public void GameEnd()
+    {
+        SceneManager.LoadScene("RespawnScene");
+    }
 
     // occurs when the player dies, or when the timer reaches 0
-    public void GameReset()
-    {
-        SceneManager.UnloadSceneAsync(currentLevelScene);
-        SceneManager.LoadScene("IntroScene");
-        SceneManager.LoadScene("CoreScene");
-    }
+
 }

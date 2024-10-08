@@ -38,7 +38,7 @@ public class OrbitingObjectScript : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (isInitialized) 
+        if (isInitialized && centralObject != null) 
         {
             // Update angle based on orbit speed
             angle += orbitSpeed * Time.fixedDeltaTime;

@@ -27,6 +27,7 @@ public class BeastShockwaveAttack : BossAttack
 
         GameObject Shockwave = Instantiate(shockwavePrefab, transform.position, transform.rotation);
         Shockwave.GetComponent<ShockwavePrefabScript>().Initialize(expansionSpeed, maxAreaSize, shockwaveDuration, attackDamage);
+        attackInProgress = false;
     }
 
 

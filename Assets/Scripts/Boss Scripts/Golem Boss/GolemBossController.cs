@@ -31,20 +31,6 @@ public class GolemBossController : BossController
     // Update is called once per frame
     protected override void Update()
     {
-        if (stateMachine.CurrentState() is BossEngagedState && CanAttack())
-        {
-            EnableAttack();
-        }
-        if (stateMachine.CurrentState() is BossAttackingState && attackOccured == false)
-        {
-            DoAttack();
-        }
-
-        if(health.currentHealth < powerAttackThreshold)
-        {
-            DoPowerAttack();
-            powerAttackThreshold -= thresholdChange;
-        }
         base.Update();
     }
 
@@ -53,26 +39,24 @@ public class GolemBossController : BossController
         base.EnableAttack();
 
         // Attack Selection Logic
+        if (health.currentHealth < powerAttackThreshold)
+        {
+            Debug.Log("BurstAttack");
+            currentAttack = burstAttack;
+            powerAttackThreshold -= thresholdChange;
+        }
 
-        if (distanceToPlayer <= meleeAttack.attackRange)
+        else if (distanceToPlayer <= meleeAttack.attackRange)
         {
             Debug.Log("MeleeAttackStart");
             currentAttack = meleeAttack;
         }
 
-        else if (distanceToPlayer <= vialAttack.attackRange)
+        else
         {
             Debug.Log("VialAttackStart");
             currentAttack = vialAttack;
         }
-
-        StartAttackWindup();
-    }
-
-    private void DoPowerAttack()
-    {
-        Debug.Log("BurstAttack");
-        currentAttack = burstAttack;
 
         StartAttackWindup();
     }

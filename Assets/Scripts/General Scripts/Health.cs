@@ -8,6 +8,7 @@ public class Health : MonoBehaviour
     public int maxHealth;
 
     private UIManager UIManager;
+    private SceneManagerObj sceneManager;
 
     public CameraShake cameraShake;
 
@@ -16,7 +17,8 @@ public class Health : MonoBehaviour
     {
         //Sets Initial Health
         currentHealth = maxHealth;
-        UIManager = GameObject.Find("UIManager").GetComponent<UIManager>();
+        UIManager = UIManager.instance;
+        sceneManager = SceneManagerObj.instance;
     }
 
     public void TakeDamage(int damage)
@@ -62,7 +64,7 @@ public class Health : MonoBehaviour
         }
         else if (gameObject.CompareTag("Player"))
         {
-            Destroy(gameObject);
+            sceneManager.GameEnd();
         }
         
         else
