@@ -2,7 +2,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static GolemVialAttack;
 
 public class GolemVialAttack : BossAttack
 {
@@ -28,7 +27,6 @@ public class GolemVialAttack : BossAttack
     public int acidDamage;
     public float acidDuration;
 
-    private int randomVial;
     private Transform currentTarget;
 
     public float areaSize;

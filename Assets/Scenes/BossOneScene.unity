@@ -390,7 +390,45 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentHealth: 0
   maxHealth: 1000
+  playerBloodEffect: {fileID: 0}
   cameraShake: {fileID: 0}
+  bossMat: {fileID: 2100000, guid: 2f258dd0e81486d45973c9c625c99d45, type: 2}
+  blendAmount: 0
+  isHit: 0
+  fadeSpeed: 7
+  hitAnimation:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: -0.0125
+      value: 0
+      inSlope: 0
+      outSlope: 1.2307693
+      tangentMode: 69
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.8
+      value: 1
+      inSlope: 1.2307693
+      outSlope: 0
+      tangentMode: 69
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: -0
+      outSlope: 0
+      tangentMode: 69
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!114 &1026852353
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -546,7 +584,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: 2f258dd0e81486d45973c9c625c99d45, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -3682,8 +3720,8 @@ Tilemap:
   - first: {x: -1, y: 8, z: 0}
     second:
       serializedVersion: 2
-      m_TileIndex: 23
-      m_TileSpriteIndex: 23
+      m_TileIndex: 17
+      m_TileSpriteIndex: 17
       m_TileMatrixIndex: 0
       m_TileColorIndex: 4
       m_TileObjectToInstantiateIndex: 65535
@@ -3735,8 +3773,8 @@ Tilemap:
     m_Data: {fileID: 0}
   - m_RefCount: 0
     m_Data: {fileID: 0}
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
+  - m_RefCount: 1
+    m_Data: {fileID: 11400000, guid: 09921c918f04381408362342ed32ec36, type: 2}
   - m_RefCount: 2
     m_Data: {fileID: 11400000, guid: 4c7e64abe594f1549ae6f7e9438efb4a, type: 2}
   - m_RefCount: 1
@@ -3747,7 +3785,7 @@ Tilemap:
     m_Data: {fileID: 11400000, guid: dcb33c527aee30545a985ec8720578a1, type: 2}
   - m_RefCount: 6
     m_Data: {fileID: 11400000, guid: c06c5d4bc7c981540abc80f8e1c0627f, type: 2}
-  - m_RefCount: 6
+  - m_RefCount: 5
     m_Data: {fileID: 11400000, guid: f12b96feee291b846a7da9fdab66941d, type: 2}
   - m_RefCount: 140
     m_Data: {fileID: 11400000, guid: 058002c5a7e9af340a78e2b6f28482ff, type: 2}
@@ -3790,8 +3828,8 @@ Tilemap:
     m_Data: {fileID: 0}
   - m_RefCount: 0
     m_Data: {fileID: 0}
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
+  - m_RefCount: 1
+    m_Data: {fileID: 663337827, guid: 05dff28428eb21043afea415278e2792, type: 3}
   - m_RefCount: 2
     m_Data: {fileID: 778620105, guid: 05dff28428eb21043afea415278e2792, type: 3}
   - m_RefCount: 1
@@ -3802,7 +3840,7 @@ Tilemap:
     m_Data: {fileID: 1236041479, guid: 05dff28428eb21043afea415278e2792, type: 3}
   - m_RefCount: 6
     m_Data: {fileID: 1530280193, guid: 05dff28428eb21043afea415278e2792, type: 3}
-  - m_RefCount: 6
+  - m_RefCount: 5
     m_Data: {fileID: -1222394495, guid: 05dff28428eb21043afea415278e2792, type: 3}
   - m_RefCount: 140
     m_Data: {fileID: -315406150, guid: 05dff28428eb21043afea415278e2792, type: 3}

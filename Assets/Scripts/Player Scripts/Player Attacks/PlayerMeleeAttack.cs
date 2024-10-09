@@ -8,7 +8,7 @@ public class PlayerMeleeAttack : PlayerAttack
     public float meleeRange;
     public float meleeAngle;
 
-    public GameObject animation;
+    public new GameObject animation;
     public float sizeVal;
 
     public float angle;

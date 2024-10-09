@@ -7,10 +7,7 @@ public class PlayerController : MonoBehaviour
 
     public static PlayerController instance;
 
-    private Rigidbody2D rb;
-    private GameObject boss;
-    private PlayerMovement movement;
-    private Health health;
+             private Health health;
     private PlayerStateMachine stateMachine;
 
     private UIManager uiManager;
@@ -42,8 +39,6 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
-
-        rb = GetComponent<Rigidbody2D>();
         stateMachine = GetComponent<PlayerStateMachine>();
         health = GetComponent<Health>();
 
@@ -78,12 +73,6 @@ public class PlayerController : MonoBehaviour
             StartCoroutine(HealPlayer());
         }
 
-        if(Input.GetKeyDown("space") && CanAttack())
-        {
-
-        }
-
-        // boss health testing
 
         if (stateMachine.CurrentState() is PlayerEnabledState && currentAttack != null && (attackStarted == false))
         {

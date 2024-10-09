@@ -3992,8 +3992,8 @@ Tilemap:
   - first: {x: -1, y: 8, z: 0}
     second:
       serializedVersion: 2
-      m_TileIndex: 23
-      m_TileSpriteIndex: 23
+      m_TileIndex: 18
+      m_TileSpriteIndex: 18
       m_TileMatrixIndex: 0
       m_TileColorIndex: 4
       m_TileObjectToInstantiateIndex: 65535
@@ -4047,8 +4047,8 @@ Tilemap:
     m_Data: {fileID: 0}
   - m_RefCount: 0
     m_Data: {fileID: 0}
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
+  - m_RefCount: 1
+    m_Data: {fileID: 11400000, guid: 09921c918f04381408362342ed32ec36, type: 2}
   - m_RefCount: 14
     m_Data: {fileID: 11400000, guid: 4084b9574aa16964e885af0a6d935b91, type: 2}
   - m_RefCount: 75
@@ -4057,7 +4057,7 @@ Tilemap:
     m_Data: {fileID: 11400000, guid: dcb33c527aee30545a985ec8720578a1, type: 2}
   - m_RefCount: 2
     m_Data: {fileID: 11400000, guid: dc58bcd9abbff2646ab51ff75f5ab78d, type: 2}
-  - m_RefCount: 7
+  - m_RefCount: 6
     m_Data: {fileID: 11400000, guid: 9ca2396f298c60a43816c72d16cfee76, type: 2}
   - m_RefCount: 3
     m_Data: {fileID: 11400000, guid: c06c5d4bc7c981540abc80f8e1c0627f, type: 2}
@@ -4102,8 +4102,8 @@ Tilemap:
     m_Data: {fileID: 0}
   - m_RefCount: 0
     m_Data: {fileID: 0}
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
+  - m_RefCount: 1
+    m_Data: {fileID: 663337827, guid: 05dff28428eb21043afea415278e2792, type: 3}
   - m_RefCount: 14
     m_Data: {fileID: -1706864902, guid: 05dff28428eb21043afea415278e2792, type: 3}
   - m_RefCount: 75
@@ -4112,7 +4112,7 @@ Tilemap:
     m_Data: {fileID: 1236041479, guid: 05dff28428eb21043afea415278e2792, type: 3}
   - m_RefCount: 2
     m_Data: {fileID: 114826565, guid: 05dff28428eb21043afea415278e2792, type: 3}
-  - m_RefCount: 7
+  - m_RefCount: 6
     m_Data: {fileID: -172733554, guid: 05dff28428eb21043afea415278e2792, type: 3}
   - m_RefCount: 3
     m_Data: {fileID: 1530280193, guid: 05dff28428eb21043afea415278e2792, type: 3}
@@ -4184,13 +4184,13 @@ GameObject:
   m_Component:
   - component: {fileID: 1606311209}
   - component: {fileID: 1606311208}
+  - component: {fileID: 1606311202}
+  - component: {fileID: 1606311201}
   - component: {fileID: 1606311207}
   - component: {fileID: 1606311206}
   - component: {fileID: 1606311205}
   - component: {fileID: 1606311204}
   - component: {fileID: 1606311203}
-  - component: {fileID: 1606311202}
-  - component: {fileID: 1606311201}
   - component: {fileID: 1606311200}
   - component: {fileID: 1606311199}
   - component: {fileID: 1606311198}
@@ -4306,9 +4306,47 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af065cae81d27374ead213c7c8848b52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentHealth: 700
-  maxHealth: 700
+  currentHealth: 800
+  maxHealth: 800
+  playerBloodEffect: {fileID: 0}
   cameraShake: {fileID: 0}
+  bossMat: {fileID: 2100000, guid: 2f258dd0e81486d45973c9c625c99d45, type: 2}
+  blendAmount: 0
+  isHit: 0
+  fadeSpeed: 7
+  hitAnimation:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 1.25
+      outSlope: 1.25
+      tangentMode: 69
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.8
+      value: 1
+      inSlope: 1.25
+      outSlope: 0
+      tangentMode: 69
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: -0
+      outSlope: 0
+      tangentMode: 69
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!114 &1606311203
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4337,10 +4375,10 @@ MonoBehaviour:
   attackInProgress: 0
   attackDamage: 50
   attackRange: 4
-  windupTime: 2
+  windupTime: 1.5
   followThroughTime: 1
   expansionSpeed: 20
-  maxAreaSize: 10
+  maxAreaSize: 8
   shockwaveDuration: 2
   shockwavePrefab: {fileID: 5293655890068358703, guid: 49cc9d6eec0167941a743da40e35ac24, type: 3}
 --- !u!114 &1606311205
@@ -4359,7 +4397,7 @@ MonoBehaviour:
   attackDamage: 10
   attackRange: 13.96
   windupTime: 0.15
-  followThroughTime: 1
+  followThroughTime: 0.8
   spineProjectile: {fileID: 8197749138660314274, guid: c506090478948c845b726d7fca82fbb4, type: 3}
   angleVariation: 20
   spineCount: 4
@@ -4380,7 +4418,7 @@ MonoBehaviour:
   attackDamage: 50
   attackRange: 4
   windupTime: 0.4
-  followThroughTime: 1
+  followThroughTime: 0.5
   dashDistance: 64
 --- !u!114 &1606311207
 MonoBehaviour:
@@ -4407,9 +4445,9 @@ MonoBehaviour:
   meleeAttack: {fileID: 1606311206}
   spineAttack: {fileID: 1606311205}
   shockwaveAttack: {fileID: 1606311204}
-  playerProximityTimer: 3.919997
+  playerProximityTimer: 0
   lastShockwave: 0
-  shockwaveCooldown: 5
+  shockwaveCooldown: 4
   phaseChanged: 0
   phaseTwoCooldown: 0.1
 --- !u!212 &1606311208
@@ -4432,7 +4470,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: 2f258dd0e81486d45973c9c625c99d45, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

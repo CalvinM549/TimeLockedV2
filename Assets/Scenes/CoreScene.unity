@@ -1089,7 +1089,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentHealth: 0
   maxHealth: 200
+  playerBloodEffect: {fileID: 411942656131241210, guid: 5be76e88587bd1547af6867749caf3c6, type: 3}
   cameraShake: {fileID: 1519065438}
+  bossMat: {fileID: 0}
+  blendAmount: 0
+  fadeSpeed: 0
+  hitAnimation:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!212 &1009677678
 SpriteRenderer:
   m_ObjectHideFlags: 0

@@ -33,11 +33,6 @@ public class PlayerMovement : MonoBehaviour
         {
             vertical = Input.GetAxisRaw("Vertical");
             horizontal = Input.GetAxisRaw("Horizontal");
-
-            if (Input.GetKeyDown("space"))
-            {
-                Dash();
-            }
         }
         UpdateSprite();
     }
@@ -64,12 +59,6 @@ public class PlayerMovement : MonoBehaviour
         currentSpeed = baseSpeed;
     }
 
-    private void Dash()
-    {
-        Vector2 dashTarget = GetComponent<PlayerController>().PlayerToMouse();
-        Vector2 dashDirection = ((Vector3)dashTarget - transform.position).normalized;
-        rb.AddForce(dashDirection * dashDistance, ForceMode2D.Impulse);
-    }
 
     public void PushPlayer(Vector2 direction, float force)
     {

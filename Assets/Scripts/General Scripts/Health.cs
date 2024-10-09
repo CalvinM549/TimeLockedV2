@@ -7,11 +7,17 @@ public class Health : MonoBehaviour
     public int currentHealth;
     public int maxHealth;
 
+    public GameObject playerBloodEffect;
+    
     private UIManager UIManager;
     private SceneManagerObj sceneManager;
 
     public CameraShake cameraShake;
+    public Material bossMat;
 
+    public float blendAmount;
+    public float fadeSpeed;
+    public AnimationCurve hitAnimation;
 
     private void Start()
     {
@@ -19,6 +25,29 @@ public class Health : MonoBehaviour
         currentHealth = maxHealth;
         UIManager = UIManager.instance;
         sceneManager = SceneManagerObj.instance;
+        if (bossMat != null)
+        {
+            StartCoroutine(Flash());
+        }
+    }
+    IEnumerator Flash()
+    {
+        blendAmount = 0;
+        bossMat.SetFloat("_BlendAmount", 0);
+        while (true)
+        {
+            while (blendAmount > 0)
+            {
+                blendAmount -= Time.deltaTime * fadeSpeed;
+                blendAmount = Mathf.Clamp(blendAmount, 0, 1);
+
+                bossMat.SetFloat("_BlendAmount", hitAnimation.Evaluate(blendAmount));
+
+                yield return null;
+            }
+            bossMat.SetFloat("_BlendAmount", 0);
+            yield return null;
+        }
     }
 
     public void TakeDamage(int damage)
@@ -27,10 +56,22 @@ public class Health : MonoBehaviour
         if(gameObject.tag == "Player")
         {
             cameraShake.ShakeCamera(damage/10);
+            if(damage >= 10)
+            {
+                Debug.Log("BloodSplatter");
+                GameObject bloodEffect = Instantiate(playerBloodEffect, transform.position, transform.rotation);
+                Destroy(bloodEffect, 0.5f);
+            }
+        }
+
+        else if(gameObject.tag == "Boss")
+        {
+            blendAmount = 1;
         }
 
         currentHealth -= damage;
         UIManager.UpdateHealthBar(currentHealth, this.gameObject);
+
         if (currentHealth <= 0)
         {
             Death();

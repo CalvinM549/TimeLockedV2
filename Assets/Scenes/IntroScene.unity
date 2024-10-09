@@ -1200,8 +1200,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -953.42, y: -538.27}
-  m_SizeDelta: {x: 1126.5453, y: 315.4128}
+  m_AnchoredPosition: {x: -952.2766, y: -538.5304}
+  m_SizeDelta: {x: 1064.7053, y: 495.5879}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &450257843
 MonoBehaviour:
@@ -1230,7 +1230,7 @@ MonoBehaviour:
     m_BestFit: 0
     m_MinSize: 0
     m_MaxSize: 229
-    m_Alignment: 1
+    m_Alignment: 0
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
@@ -1243,6 +1243,11 @@ MonoBehaviour:
     L Click - Melee
 
     R Click - Ranged
+
+    Hit
+    Melee Attacks to
+
+    Recharge Ranged Projectiles
 
 '
 --- !u!222 &450257844
@@ -1416,7 +1421,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: break the time loop
+  m_Text: "Destroy the Artifact to \nbreak the time loop"
 --- !u!222 &1359419008
 CanvasRenderer:
   m_ObjectHideFlags: 0

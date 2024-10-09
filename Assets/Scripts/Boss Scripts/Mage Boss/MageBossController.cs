@@ -75,10 +75,6 @@ public class MageBossController : BossController
         StartAttackWindup();
     }
 
-    private IEnumerator SpawnTurrets()
-    {
-        yield return new WaitForSeconds(1f);
-    }
 
     private bool CanTeleport(float teleportCooldown)
     {

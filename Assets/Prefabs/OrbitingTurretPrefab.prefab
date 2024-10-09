@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 419388042066197643}
   - component: {fileID: 7821916372923310921}
-  - component: {fileID: 4325129965708694374}
   - component: {fileID: 5279489011670375554}
+  - component: {fileID: 4325129965708694374}
   - component: {fileID: 6030581548982925572}
   - component: {fileID: 4978009807149035879}
   - component: {fileID: 6272647544858068617}
@@ -62,7 +62,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: 2f258dd0e81486d45973c9c625c99d45, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -94,6 +94,32 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &5279489011670375554
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2689196648281389422}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af065cae81d27374ead213c7c8848b52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentHealth: 0
+  maxHealth: 100
+  playerBloodEffect: {fileID: 0}
+  cameraShake: {fileID: 0}
+  bossMat: {fileID: 0}
+  blendAmount: 0
+  isHit: 0
+  fadeSpeed: 0
+  hitAnimation:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!114 &4325129965708694374
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -113,21 +139,6 @@ MonoBehaviour:
   orbitSpeed: 70
   smoothMovementSpeed: 1
   angle: 0
---- !u!114 &5279489011670375554
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2689196648281389422}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: af065cae81d27374ead213c7c8848b52, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  currentHealth: 0
-  maxHealth: 100
-  cameraShake: {fileID: 0}
 --- !u!114 &6030581548982925572
 MonoBehaviour:
   m_ObjectHideFlags: 0
