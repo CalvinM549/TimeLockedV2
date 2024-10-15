@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class BeastBossController : BossController
 {
-
-
     public BossAttack meleeAttack;
     public BossAttack spineAttack;
     public BossAttack shockwaveAttack;
@@ -23,6 +21,7 @@ public class BeastBossController : BossController
     protected override void Start()
     {
         base.Start();
+        meleeDamageOccurred = false;
     }
 
     // Update is called once per frame
@@ -49,7 +48,9 @@ public class BeastBossController : BossController
         base.EnableAttack();
 
         // Attack Selection Logic
-                
+
+        meleeDamageOccurred = false;
+        
         if (CanShockwave())
         {
             Debug.Log("ShockwaveAttack");
@@ -109,12 +110,25 @@ public class BeastBossController : BossController
     }
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (attackOccured)
+        if (attackOccured && meleeDamageOccurred == false)
         {
             if (other.CompareTag("Player"))
             {
                 other.GetComponent<Health>().TakeDamage(meleeAttack.attackDamage);
             }
+            meleeDamageOccurred = true;
+        }
+    }
+
+    private void OnTriggerStay2D(Collider2D other)
+    {
+        if (attackOccured && meleeDamageOccurred == false)
+        {
+            if (other.CompareTag("Player"))
+            {
+                other.GetComponent<Health>().TakeDamage(meleeAttack.attackDamage);
+            }
+            meleeDamageOccurred = true;
         }
     }
 }

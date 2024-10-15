@@ -66,4 +66,12 @@ public class GolemBurstAttack : BossAttack
 
     }
 
+    private void OnDestroy()
+    {
+        if(warning != null)
+        {
+            Destroy(warning);
+        }
+    }
+
 }

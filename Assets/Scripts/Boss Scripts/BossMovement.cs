@@ -12,12 +12,14 @@ public class BossMovement : MonoBehaviour
     public Transform target;
     private Rigidbody2D rb;
     private SpriteRenderer spriteRenderer;
+    private Animator anim;
 
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        anim = GetComponent<Animator>();
     }
 
     public void SetTarget(Transform target)
@@ -30,7 +32,13 @@ public class BossMovement : MonoBehaviour
     {
         if(target != null && movementEnabled)
         {
+            anim.SetBool("isMoving", true);
             MoveTowardsTarget();
+            UpdateSprite();
+        }
+        else
+        {
+            anim.SetBool("isMoving", false);
         }
     }
 
@@ -52,11 +60,11 @@ public class BossMovement : MonoBehaviour
     }
     private void UpdateSprite()
     {
-        //if (moveVector)
+        if (moveVector.x < 0)
         {
             spriteRenderer.flipX = true;
         }
-        //else if (horizontal < 0)
+        else
         {
             spriteRenderer.flipX = false;
         }

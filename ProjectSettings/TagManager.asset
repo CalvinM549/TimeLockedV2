@@ -10,6 +10,8 @@ TagManager:
   - Wall
   - PlayerProjectile
   - GroundObject
+  - Corpse
+  - Vial
   layers:
   - Default
   - TransparentFX

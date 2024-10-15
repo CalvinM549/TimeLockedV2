@@ -46,7 +46,7 @@ public class MageFireballAttack : BossAttack
             Debug.Log("Fireball #"+(i+1));
             targetArea = target.position;
             GameObject warning = Instantiate(warningCircle, targetArea, transform.rotation);
-            StartCoroutine(FireBallDamage(warning));
+            StartCoroutine(FireBallDamage(warning, targetArea));
             warning.transform.localScale = areaSize;
             yield return new WaitForSeconds(delayBetween);
         }
@@ -55,11 +55,11 @@ public class MageFireballAttack : BossAttack
         attackInProgress = false;
     }
 
-    private IEnumerator FireBallDamage(GameObject warning)
+    private IEnumerator FireBallDamage(GameObject warning, Vector3 currentTarget)
     {
         yield return new WaitForSeconds(impactDelay);
 
-        Collider2D[] colliders = Physics2D.OverlapCircleAll(targetArea, attackRange);
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(currentTarget, attackRange);
         foreach(Collider2D collider in colliders)
         {
             if(collider.gameObject.tag == "Player")

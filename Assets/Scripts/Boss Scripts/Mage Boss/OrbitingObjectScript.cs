@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class OrbitingObjectScript : MonoBehaviour
@@ -63,9 +64,12 @@ public class OrbitingObjectScript : MonoBehaviour
         {
             yield return new WaitForSeconds(delayBetweenAttacks);
 
-            attack.StartAttack(centralTransform);
-            yield return null;
-            attack.ExecuteAttack();
+            if(centralObject != null)
+            {
+                attack.StartAttack(centralTransform);
+                yield return null;
+                attack.ExecuteAttack();
+            }
         }
     }
 }

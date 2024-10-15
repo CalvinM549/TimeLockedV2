@@ -8,6 +8,9 @@ public class UIManager : MonoBehaviour
     //public TextMeshProUGUI 
     public static UIManager instance;
 
+    public UnityEngine.UI.Image fadeImage;
+    public float fadeDuration;
+    private bool isFading;
 
     public UnityEngine.UI.Image bossHealthLeft;
     public UnityEngine.UI.Image bossHealthRight;
@@ -44,7 +47,6 @@ public class UIManager : MonoBehaviour
         playerMaxHealth = player.GetComponent<Health>().maxHealth;
 
         maxAmmo = player.GetComponent<PlayerController>().rangedAmmo;
-        healChargeText.text = player.GetComponent<PlayerController>().healCharges.ToString();
     }
 
     // Update is called once per frame
@@ -52,6 +54,18 @@ public class UIManager : MonoBehaviour
     {
         UpdateTimer();
 
+        if (isFading)
+        {
+            Color currentColor = fadeImage.color;
+            float fadeAmount = Time.deltaTime / fadeDuration;
+            currentColor.a = Mathf.Clamp01(currentColor.a + fadeAmount);
+            fadeImage.color = currentColor;
+
+            if(currentColor.a >= 1)
+            {
+               isFading = false;
+            }
+        }
     }
 
     private void UpdateTimer()
@@ -106,4 +120,11 @@ public class UIManager : MonoBehaviour
             bossHealthRight.fillAmount = ((float)newHealth / (float)bossMaxHealth);
         }
     }
+
+    public void StartFade()
+    {
+        isFading = true;
+    }
+
+
 }

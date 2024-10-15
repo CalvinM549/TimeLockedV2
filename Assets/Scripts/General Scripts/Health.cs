@@ -64,7 +64,7 @@ public class Health : MonoBehaviour
             }
         }
 
-        else if(gameObject.tag == "Boss")
+        if(bossMat != null)
         {
             blendAmount = 1;
         }
@@ -106,6 +106,7 @@ public class Health : MonoBehaviour
         else if (gameObject.CompareTag("Player"))
         {
             sceneManager.GameEnd();
+            Destroy(gameObject);
         }
         
         else

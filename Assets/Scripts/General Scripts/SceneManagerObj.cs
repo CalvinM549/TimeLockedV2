@@ -23,6 +23,7 @@ public class SceneManagerObj : MonoBehaviour
     void Start()
     {
         gameManager = GameManager.instance;
+        uiManager = UIManager.instance;
         StartGame();
     }
 
@@ -56,6 +57,8 @@ public class SceneManagerObj : MonoBehaviour
 
     public void LoadTransition()
     {
+        Destroy(GameObject.FindWithTag("Vial"));
+        Destroy(GameObject.FindWithTag("Corpse"));
         SceneManager.UnloadSceneAsync(currentLevelScene);
         SceneManager.LoadScene("StairwellScene", LoadSceneMode.Additive);
     }
@@ -67,8 +70,20 @@ public class SceneManagerObj : MonoBehaviour
     
     public void GameEnd()
     {
-        SceneManager.LoadScene("RespawnScene");
+        StartCoroutine(LoadToMenu("RespawnScene"));
     }
+    public void GameWin()
+    {
+        StartCoroutine(LoadToMenu("VictoryScene"));
+    }
+
+    private IEnumerator LoadToMenu(string menuScene)
+    {
+        uiManager.StartFade();
+        yield return new WaitForSeconds(uiManager.fadeDuration);
+        SceneManager.LoadScene(menuScene);
+    }
+
 
     // occurs when the player dies, or when the timer reaches 0
 

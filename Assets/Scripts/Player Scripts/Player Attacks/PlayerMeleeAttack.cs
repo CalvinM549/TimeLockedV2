@@ -26,15 +26,27 @@ public class PlayerMeleeAttack : PlayerAttack
     {
 
         Vector3 mouseVector = GetComponent<PlayerController>().PlayerToMouse();
-        Collider2D[] hitColliders = Physics2D.OverlapCircleAll(transform.position, meleeRange);
+        
         //Debug.DrawRay(transform.position, mouseVector, Color.green, 2, false);
 
         angle = Mathf.Atan2(mouseVector.y, mouseVector.x) * Mathf.Rad2Deg;
         q = Quaternion.Euler(0f, 0f, angle-90);
+
         GameObject anim = Instantiate(animation, transform.position, q);
         anim.transform.parent = transform;
         anim.transform.localScale = new Vector3(sizeVal, sizeVal, 0f);
 
+        float damageDelay = anim.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length / 2;
+
+        StartCoroutine(delayDamage(damageDelay, mouseVector));
+
+        
+    }
+
+    private IEnumerator delayDamage(float delay, Vector3 mouseVector)
+    {
+        yield return new WaitForSeconds(delay);
+        Collider2D[] hitColliders = Physics2D.OverlapCircleAll(transform.position, meleeRange);
         foreach (Collider2D collider in hitColliders)
         {
             if (!(collider.CompareTag("Player")) && !(collider.CompareTag("Wall")))

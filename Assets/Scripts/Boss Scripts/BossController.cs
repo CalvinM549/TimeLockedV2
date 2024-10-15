@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static GolemBossController;
+using UnityEngine.SceneManagement;
 
 public class BossController : MonoBehaviour
 {
@@ -13,12 +13,16 @@ public class BossController : MonoBehaviour
     public BossAttack currentAttack;
     public List<BossAttack> attacks;
 
+    public GameObject corpseSprite;
+
     public GameObject player;
     public float distanceToPlayer;
 
     public float lastAttackTime;
     public float attackCooldown;
     public bool attackOccured;
+
+    protected bool meleeDamageOccurred;
 
     protected virtual void Start()
     {
@@ -111,9 +115,14 @@ public class BossController : MonoBehaviour
         Debug.Log("ResetToEngaged");
     }
 
+    
+
     private void OnDestroy()
     {
-        gameManager.bossDefeated = true;
+        if(health.currentHealth <= 0)
+        {
+            Instantiate(corpseSprite, transform.position, transform.rotation);
+            gameManager.bossDefeated = true;
+        }
     }
-
 }
