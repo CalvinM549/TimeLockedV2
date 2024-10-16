@@ -60,7 +60,7 @@ public class MageBossController : BossController
             currentTeleportCooldown = Random.Range(minTeleportCooldown, maxTeleportCooldown);
         }
 
-        else if (artifactHealth.currentHealth < fireballAttackThreshold)
+        else if (artifactHealth.currentHealth < fireballAttackThreshold && artifactHealth.currentHealth >= 0)
         {
             currentAttack = attacks[1]; // sets to fireball attack
             fireballAttackThreshold -= fireballThresholdChange;

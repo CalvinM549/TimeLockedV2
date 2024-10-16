@@ -11,8 +11,6 @@ public class GolemBossController : BossController
     private BossAttack vialAttack;
     private BossAttack burstAttack;
 
-    private bool hasPowerAttacked;
-
     public int powerAttackThreshold;
     public int thresholdChange;
 
@@ -23,6 +21,7 @@ public class GolemBossController : BossController
     protected override void Start()
     {
         base.Start();
+        meleeDamageOccurred = false;
         meleeAttack = attacks[0];
         vialAttack = attacks[1];
         burstAttack = attacks[2];
@@ -39,6 +38,8 @@ public class GolemBossController : BossController
         base.EnableAttack();
 
         // Attack Selection Logic
+        meleeDamageOccurred = false;
+
         if (health.currentHealth < powerAttackThreshold)
         {
             Debug.Log("BurstAttack");
@@ -63,12 +64,25 @@ public class GolemBossController : BossController
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (attackOccured)
+        if (attackOccured && meleeDamageOccurred == false)
         {
             if (other.CompareTag("Player"))
             {
                 other.GetComponent<Health>().TakeDamage(meleeAttack.attackDamage);
             }
+            meleeDamageOccurred = true;
+        }
+    }
+
+    private void OnTriggerStay2D(Collider2D other)
+    {
+        if (attackOccured && meleeDamageOccurred == false)
+        {
+            if (other.CompareTag("Player"))
+            {
+                other.GetComponent<Health>().TakeDamage(meleeAttack.attackDamage);
+            }
+            meleeDamageOccurred = true;
         }
     }
 

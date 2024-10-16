@@ -15,8 +15,8 @@ public class BeastShockwaveAttack : BossAttack
     {
         // On windup effects
         Debug.Log("StartAttack");
-
         base.StartAttack(target);
+        anim.Play("BeastSlamAttackStart");
     }
 
     public override void ExecuteAttack()
@@ -25,11 +25,15 @@ public class BeastShockwaveAttack : BossAttack
         attackInProgress = true;
         Debug.Log("ExecuteAttack");
 
-        GameObject Shockwave = Instantiate(shockwavePrefab, transform.position, transform.rotation);
-        Shockwave.GetComponent<ShockwavePrefabScript>().Initialize(expansionSpeed, maxAreaSize, shockwaveDuration, attackDamage);
+        anim.SetTrigger("attackReturn");
         attackInProgress = false;
+
     }
 
-
+    public void SpawnShockwave()
+    {
+        GameObject Shockwave = Instantiate(shockwavePrefab, transform.position, transform.rotation);
+        Shockwave.GetComponent<ShockwavePrefabScript>().Initialize(expansionSpeed, maxAreaSize, shockwaveDuration, attackDamage);
+    }
 
 }

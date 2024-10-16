@@ -1382,7 +1382,7 @@ TilemapRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -1
+  m_SortingOrder: -2
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
   m_MaxChunkCount: 16
@@ -3460,6 +3460,7 @@ MonoBehaviour:
   movementSpeed: 3.12
   movementEnabled: 0
   target: {fileID: 0}
+  defaultRight: 0
 --- !u!114 &924915573
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3542,7 +3543,7 @@ MonoBehaviour:
   attackOccured: 0
   timeArtifact: {fileID: 955841941}
   fireballAttackThreshold: 300
-  fireballThresholdChange: 100
+  fireballThresholdChange: 200
   turretSpawnThreshold: 500
   turretThresholdChange: 200
   maxTurrets: 0
@@ -3615,7 +3616,7 @@ MonoBehaviour:
   followThroughTime: 0
   warningCircle: {fileID: 2701718515679393289, guid: c96155860fffdbb49a3e1875342ed826, type: 3}
   fireballCount: 10
-  impactDelay: 2
+  impactDelay: 1.5
   attackDuration: 5
 --- !u!114 &924915579
 MonoBehaviour:
@@ -3901,7 +3902,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a125c6291296d64fb7ad490232ef5e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destroyedArtifact: {fileID: 9217017246895255843, guid: 696c81d1c6732714193a039b7df486c3, type: 3}
+  destroyedSprite: {fileID: 21300000, guid: 1e6b238579a2bdc40ab117ab4537abfa, type: 3}
 --- !u!114 &955841943
 MonoBehaviour:
   m_ObjectHideFlags: 0

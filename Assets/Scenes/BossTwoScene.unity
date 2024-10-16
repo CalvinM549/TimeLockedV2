@@ -4360,7 +4360,7 @@ Tilemap:
     second:
       serializedVersion: 2
       m_TileIndex: 14
-      m_TileSpriteIndex: 14
+      m_TileSpriteIndex: 16
       m_TileMatrixIndex: 0
       m_TileColorIndex: 4
       m_TileObjectToInstantiateIndex: 65535
@@ -4420,7 +4420,7 @@ Tilemap:
     second:
       serializedVersion: 2
       m_TileIndex: 12
-      m_TileSpriteIndex: 12
+      m_TileSpriteIndex: 15
       m_TileMatrixIndex: 0
       m_TileColorIndex: 4
       m_TileObjectToInstantiateIndex: 65535
@@ -4430,7 +4430,7 @@ Tilemap:
     second:
       serializedVersion: 2
       m_TileIndex: 11
-      m_TileSpriteIndex: 11
+      m_TileSpriteIndex: 14
       m_TileMatrixIndex: 0
       m_TileColorIndex: 4
       m_TileObjectToInstantiateIndex: 65535
@@ -4525,18 +4525,18 @@ Tilemap:
     m_Data: {fileID: 0}
   - m_RefCount: 0
     m_Data: {fileID: 0}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
+  - m_RefCount: 1
+    m_Data: {fileID: -295664880, guid: 5102e9de7d0b05d45bd98d1d672c4e3f, type: 3}
   - m_RefCount: 1
     m_Data: {fileID: -231232830, guid: 5102e9de7d0b05d45bd98d1d672c4e3f, type: 3}
   - m_RefCount: 1
     m_Data: {fileID: -2043838651, guid: 5102e9de7d0b05d45bd98d1d672c4e3f, type: 3}
   - m_RefCount: 1
-    m_Data: {fileID: -295664880, guid: 5102e9de7d0b05d45bd98d1d672c4e3f, type: 3}
-  - m_RefCount: 1
     m_Data: {fileID: -94755931, guid: 5102e9de7d0b05d45bd98d1d672c4e3f, type: 3}
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
   - m_RefCount: 5
     m_Data: {fileID: 1083637779, guid: 5102e9de7d0b05d45bd98d1d672c4e3f, type: 3}
   - m_RefCount: 1
@@ -4652,6 +4652,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b630b9f0970293d479cacbb2c5d9bdbc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  anim: {fileID: 0}
   bossMovement: {fileID: 1606311201}
   player: {fileID: 0}
 --- !u!58 &1606311199
@@ -4731,6 +4732,7 @@ MonoBehaviour:
   movementSpeed: 10
   movementEnabled: 1
   target: {fileID: 0}
+  defaultRight: 0
 --- !u!114 &1606311202
 MonoBehaviour:
   m_ObjectHideFlags: 0

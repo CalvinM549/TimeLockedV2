@@ -7,8 +7,9 @@ public class PlayerController : MonoBehaviour
 
     public static PlayerController instance;
 
-             private Health health;
+    private Health health;
     private PlayerStateMachine stateMachine;
+    private PlayerMovement movement;
 
     private UIManager uiManager;
 
@@ -40,6 +41,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         stateMachine = GetComponent<PlayerStateMachine>();
+        movement = GetComponent<PlayerMovement>();
         health = GetComponent<Health>();
 
         uiManager = GameObject.Find("UIManager").GetComponent<UIManager>();
@@ -68,7 +70,7 @@ public class PlayerController : MonoBehaviour
         }
 
         // Heal
-        if (Input.GetKeyDown("f") && healCharges > 0 && !healOccuring)
+        if (Input.GetKeyDown("f") && healCharges > 0 && health.currentHealth != health.maxHealth && !healOccuring)
         {
             StartCoroutine(HealPlayer());
         }
@@ -90,9 +92,11 @@ public class PlayerController : MonoBehaviour
     private IEnumerator HealPlayer()
     {
         healOccuring = true;
-        stateMachine.ChangeState<PlayerStunnedState>();
-        GetComponent<PlayerStunnedState>().stunDuration = healTime;
+        //stateMachine.ChangeState<PlayerStunnedState>();
+        //GetComponent<PlayerStunnedState>().stunDuration = healTime;
+        movement.Slow(0.1f);
         yield return new WaitForSeconds(healTime);
+        movement.EndSlow();
         health.GainHealth(healAmount);
         healCharges--;
 

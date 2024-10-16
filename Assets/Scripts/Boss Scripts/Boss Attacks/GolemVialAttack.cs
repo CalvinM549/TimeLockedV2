@@ -37,6 +37,7 @@ public class GolemVialAttack : BossAttack
     public override void StartAttack(Transform target)
     {
         base.StartAttack(target);
+        anim.Play("GolemThrowAttack");
         Debug.Log("StartAttack");
 
         //Array vialOptions = Enum.GetValues(typeof(Vial));
@@ -97,6 +98,7 @@ public class GolemVialAttack : BossAttack
         }
 
         attackInProgress = false;
+        anim.SetTrigger("attackReturn");
     }
 }
 

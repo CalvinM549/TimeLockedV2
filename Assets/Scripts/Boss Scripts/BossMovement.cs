@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using static UnityEditor.Searcher.SearcherWindow.Alignment;
 
 public class BossMovement : MonoBehaviour
 {
@@ -13,6 +10,8 @@ public class BossMovement : MonoBehaviour
     private Rigidbody2D rb;
     private SpriteRenderer spriteRenderer;
     private Animator anim;
+
+    public bool defaultRight;
 
     // Start is called before the first frame update
     void Start()
@@ -62,11 +61,11 @@ public class BossMovement : MonoBehaviour
     {
         if (moveVector.x < 0)
         {
-            spriteRenderer.flipX = true;
+            spriteRenderer.flipX = defaultRight == true ? true : false;
         }
         else
         {
-            spriteRenderer.flipX = false;
+            spriteRenderer.flipX = defaultRight == true ? false : true;
         }
     }
 }

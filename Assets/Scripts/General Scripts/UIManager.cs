@@ -2,32 +2,32 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
     //public TextMeshProUGUI 
     public static UIManager instance;
 
-    public UnityEngine.UI.Image fadeImage;
+    public Image fadeImage;
     public float fadeDuration;
     private bool isFading;
 
-    public UnityEngine.UI.Image bossHealthLeft;
-    public UnityEngine.UI.Image bossHealthRight;
+    public Image bossHealthLeft;
+    public Image bossHealthRight;
 
-    public UnityEngine.UI.Image playerHealthBar;
-    public UnityEngine.UI.Image playerHealthBarGhost;
+    public Image playerHealthBar;
+    public Image playerHealthBarGhost;
 
     //public TextMeshProUGUI ammoText;
     private float maxAmmo;
-    public UnityEngine.UI.Image ammoImage;
+    public Image ammoImage;
 
     public Sprite[] HealChargeSpites;
-    public UnityEngine.UI.Image healChargeImage;
-    public TextMeshProUGUI healChargeText;
-
-    public TextMeshProUGUI timerText;
-    public UnityEngine.UI.Image timerImage;
+    public Image healChargeImage;
+     
+    public Text timerText;
+    public AnimationCurve timerSize;
 
     private GameObject player;
     private GameObject boss;
@@ -72,9 +72,10 @@ public class UIManager : MonoBehaviour
     {
         int minutes = Mathf.FloorToInt(gameManager.timer / 60f);
         int seconds = Mathf.FloorToInt(gameManager.timer - minutes * 60);
-
+        float scaleTime = gameManager.timer / gameManager.maxTime;
+        float textScale = timerSize.Evaluate(scaleTime);
+        timerText.transform.localScale = new Vector3(textScale, textScale, 0f);
         timerText.text = string.Format("{0:0}:{1:00}", minutes, seconds);
-        timerImage.fillAmount = gameManager.timer / gameManager.maxTime;
     }
 
     public void UpdateAmmoCount(int ammo)

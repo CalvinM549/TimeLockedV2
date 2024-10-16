@@ -13,6 +13,8 @@ public class BossMeleeAttack : BossAttack
 
     public override void StartAttack(Transform target)
     {
+
+
         meleeTarget = target;
         targetPosition = target.position;
         Debug.Log("StartAttack");
@@ -31,6 +33,11 @@ public class BossMeleeAttack : BossAttack
         Debug.Log("ExecuteAttack");
         movement.Dash(targetPosition, dashDistance);
         attackInProgress = false;
+        if (gameObject.GetComponent<BeastBossController>() != null)
+        {
+
+            anim.Play("BeastRun");
+        }
     }
 
     // selects location to attack and enters windup

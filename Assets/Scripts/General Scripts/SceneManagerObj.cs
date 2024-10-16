@@ -57,7 +57,10 @@ public class SceneManagerObj : MonoBehaviour
 
     public void LoadTransition()
     {
-        Destroy(GameObject.FindWithTag("Vial"));
+        
+        foreach(GameObject currentVial in GameObject.FindGameObjectsWithTag("Vial")){
+            Destroy(currentVial);
+        }
         Destroy(GameObject.FindWithTag("Corpse"));
         SceneManager.UnloadSceneAsync(currentLevelScene);
         SceneManager.LoadScene("StairwellScene", LoadSceneMode.Additive);
@@ -88,3 +91,4 @@ public class SceneManagerObj : MonoBehaviour
     // occurs when the player dies, or when the timer reaches 0
 
 }
+

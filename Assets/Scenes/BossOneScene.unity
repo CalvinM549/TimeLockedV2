@@ -378,6 +378,7 @@ MonoBehaviour:
   movementSpeed: 10
   movementEnabled: 0
   target: {fileID: 0}
+  defaultRight: 1
 --- !u!114 &1026852352
 MonoBehaviour:
   m_ObjectHideFlags: 0

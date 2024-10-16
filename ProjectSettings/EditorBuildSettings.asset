@@ -5,10 +5,31 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
-    path: Assets/Scenes/Depreciated Scenes/SampleScene.unity
-    guid: 8c9cfa26abfee488c85f1582747f6a02
+  - enabled: 1
+    path: Assets/Scenes/MainMenu.unity
+    guid: ef23ddb1b3d1a82418c24bacd26d7e7d
   - enabled: 1
     path: Assets/Scenes/CoreScene.unity
     guid: 178fe9d3f0d889549b51c0f79b095946
+  - enabled: 1
+    path: Assets/Scenes/RespawnScene.unity
+    guid: da6a93ce2832fdf4eb81e83183a92b9a
+  - enabled: 1
+    path: Assets/Scenes/VictoryScene.unity
+    guid: 4c247271b9c3273479372bdfc1418d25
+  - enabled: 1
+    path: Assets/Scenes/IntroScene.unity
+    guid: b2d08a9906f3e744683db6302ac67d66
+  - enabled: 1
+    path: Assets/Scenes/StairwellScene.unity
+    guid: 566d3ad8ba28b1a4294e759c97cbb125
+  - enabled: 1
+    path: Assets/Scenes/BossOneScene.unity
+    guid: 8eec59e9e89061a4f96a4b5fb14d5cc3
+  - enabled: 1
+    path: Assets/Scenes/BossTwoScene.unity
+    guid: 6dc4068c8dc93af408fe74c0ea4045ef
+  - enabled: 1
+    path: Assets/Scenes/BossThreeScene.unity
+    guid: 5ca887cff81d3f54982725cb11836274
   m_configObjects: {}

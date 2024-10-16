@@ -15,6 +15,8 @@ public class BossEngagedState : BossState
 
         bossMovement = GetComponent<BossMovement>();
         bossMovement.movementEnabled = true;
+        anim.SetBool("isMoving", true); 
+
     }
 
     public override void UpdateState()
@@ -25,6 +27,7 @@ public class BossEngagedState : BossState
     public override void ExitState()
     {
         bossMovement.movementEnabled = false;
+        anim.SetBool("isMoving", false);
         Debug.Log("Exit Engaged");
     }
 }

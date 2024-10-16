@@ -6,7 +6,7 @@ public abstract class BossState : MonoBehaviour
 {
     protected BossStateMachine stateMachine;
     protected GameObject boss;
-
+    public Animator anim;
     protected BossState(BossStateMachine stateMachine, GameObject boss)
     {
         this.stateMachine = stateMachine;
@@ -15,6 +15,7 @@ public abstract class BossState : MonoBehaviour
 
     public void Initialize(BossStateMachine stateMachine)
     {
+        anim = GetComponent<Animator>();
         this.stateMachine = stateMachine;
         this.boss = stateMachine.gameObject;
     }

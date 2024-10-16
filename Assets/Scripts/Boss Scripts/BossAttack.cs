@@ -5,6 +5,7 @@ using UnityEngine;
 public abstract class BossAttack : MonoBehaviour
 {
     private BossStateMachine stateMachine;
+    protected Animator anim;
 
     public bool attackInProgress;
 
@@ -19,6 +20,7 @@ public abstract class BossAttack : MonoBehaviour
     {
         stateMachine = GetComponent<BossStateMachine>();
         stateMachine.ChangeState<BossWindupState>();
+        anim = GetComponent<Animator>();
     }
 
     public abstract void ExecuteAttack();

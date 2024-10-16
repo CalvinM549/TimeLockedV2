@@ -10,6 +10,7 @@ public class MageTeleport : BossAttack
 
     private int chosenPoint;
     private int lastPoint;
+    private bool animOccured;
 
     // Warning visual variables
     public GameObject warning;
@@ -22,7 +23,7 @@ public class MageTeleport : BossAttack
     public override void StartAttack(Transform target)
     {
         endArea.Set(attackRange * 2, attackRange * 2);
-
+        animOccured = false;
         base.StartAttack(target);
 
         warning = Instantiate(warningCircle, transform.position, transform.rotation);
@@ -49,6 +50,7 @@ public class MageTeleport : BossAttack
         }
         
         gameObject.transform.position = teleportPoints[chosenPoint];
+        anim.Play("MageTeleportReturn");
         lastPoint = chosenPoint;
 
     }
@@ -67,6 +69,11 @@ public class MageTeleport : BossAttack
             warning.transform.localScale = areaSize;
 
             yield return null;
+            if (elapsedTime >= windupTime - 0.5f && !animOccured)
+            {
+                anim.Play("MageTeleportStart");
+                animOccured = true;
+            }
         }
         elapsedTime = 0;
         Destroy(warning);
