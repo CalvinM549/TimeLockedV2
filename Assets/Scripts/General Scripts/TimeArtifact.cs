@@ -8,6 +8,7 @@ public class TimeArtifact : MonoBehaviour
     private Health health;
     private SceneManagerObj sceneManager;
     private SpriteRenderer spriteRenderer;
+    private Animator animator;
     public Sprite destroyedSprite;
 
 
@@ -15,9 +16,10 @@ public class TimeArtifact : MonoBehaviour
     void Start()
     {
         gameManager = GameManager.instance;
+        sceneManager = SceneManagerObj.instance;
         health = GetComponent<Health>();
         spriteRenderer = GetComponent<SpriteRenderer>();
-        sceneManager = SceneManagerObj.instance;
+        animator = GetComponent<Animator>();
 
     }
 
@@ -26,9 +28,10 @@ public class TimeArtifact : MonoBehaviour
     {
         if(health.currentHealth <= 0)
         {
-            if(gameManager.timerActive && spriteRenderer.sprite != destroyedSprite)
+            if (gameManager.timerActive == true)
             {
                 gameManager.timerActive = false;
+                animator.enabled = false;
                 spriteRenderer.sprite = destroyedSprite;
             }
             if (gameManager.bossDefeated)
